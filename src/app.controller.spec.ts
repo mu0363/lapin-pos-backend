@@ -16,7 +16,9 @@ describe('AppController', () => {
 
   describe('root', () => {
     it('should return "Hello World!"', () => {
-      expect(appController.getHello()).toBe('Welcome Lapin POS system!');
+      expect(appController.getHello()).toBe(
+        'Welcome Lapin POS system updated!',
+      );
     });
   });
 });
