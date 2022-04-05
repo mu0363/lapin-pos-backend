@@ -1,5 +1,6 @@
-import { UseGuards } from '@nestjs/common';
+import { ParseUUIDPipe, UseGuards } from '@nestjs/common';
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import { GetCurrentUserId } from 'src/common/decorators/current-user-id.decorator';
 import { AuthenticateGuard } from 'src/common/guards/authenticate.guard';
 import { CreateSessionInput } from './dto/create-session.input';
 import { UpdateSessionInput } from './dto/update-session.input';
@@ -13,9 +14,10 @@ export class SessionResolver {
 
   @Mutation(() => Session)
   createSession(
+    @GetCurrentUserId('userId', new ParseUUIDPipe()) userId: string,
     @Args('createSessionInput') createSessionInput: CreateSessionInput,
   ) {
-    return this.sessionService.create(createSessionInput);
+    return this.sessionService.create(createSessionInput, userId);
   }
 
   @Query(() => [Session], { name: 'session' })

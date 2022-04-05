@@ -6,9 +6,9 @@ import { UpdateSessionInput } from './dto/update-session.input';
 @Injectable()
 export class SessionService {
   constructor(private readonly prisma: PrismaService) {}
-  create(createSessionInput: CreateSessionInput) {
+  create(createSessionInput: CreateSessionInput, userId: string) {
     return this.prisma.session.create({
-      data: createSessionInput,
+      data: { ...createSessionInput, userId },
     });
   }
 
