@@ -8,15 +8,6 @@ export class SessionService {
   constructor(private readonly prisma: PrismaService) {}
   async create(createSessionInput: CreateSessionInput) {
     const { customerId, castId, planId } = createSessionInput;
-    const customer = await this.prisma.customer.findUnique({
-      where: { id: customerId },
-    });
-    const cast = await this.prisma.cast.findUnique({
-      where: { id: castId },
-    });
-    const plan = await this.prisma.plan.findUnique({
-      where: { id: planId },
-    });
     return this.prisma.session.create({
       data: { customerId, castId, planId },
     });
