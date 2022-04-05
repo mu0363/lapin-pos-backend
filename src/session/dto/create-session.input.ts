@@ -8,6 +8,4 @@ export class CreateSessionInput {
   castId: number;
   @Field(() => Int)
   planId: number;
-  enteredAt: Date;
-  exitedAtDate: Date;
 }

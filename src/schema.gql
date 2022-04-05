@@ -42,8 +42,13 @@ type Item {
 }
 
 type Session {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  id: Int!
+  customerId: String!
+  castId: String!
+  planId: String!
+  userId: String
+  enteredAt: DateTime!
+  exitedAt: DateTime!
 }
 
 type Cast {
@@ -139,16 +144,12 @@ input CreateSessionInput {
   customerId: Int!
   castId: Int!
   planId: Int!
-  enteredAt: DateTime!
-  exitedAtDate: DateTime!
 }
 
 input UpdateSessionInput {
   customerId: Int
   castId: Int
   planId: Int
-  enteredAt: DateTime
-  exitedAtDate: DateTime
   id: Int!
 }
 

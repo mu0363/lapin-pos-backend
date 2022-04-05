@@ -2,6 +2,12 @@ import { ObjectType, Field, Int } from '@nestjs/graphql';
 
 @ObjectType()
 export class Session {
-  @Field(() => Int, { description: 'Example field (placeholder)' })
-  exampleField: number;
+  @Field(() => Int)
+  id: number;
+  customerId: string;
+  castId: string;
+  planId: string;
+  userId?: string;
+  enteredAt: Date;
+  exitedAt: Date;
 }
