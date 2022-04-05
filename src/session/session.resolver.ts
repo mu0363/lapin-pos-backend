@@ -1,10 +1,13 @@
+import { UseGuards } from '@nestjs/common';
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import { AuthenticateGuard } from 'src/common/guards/authenticate.guard';
 import { CreateSessionInput } from './dto/create-session.input';
 import { UpdateSessionInput } from './dto/update-session.input';
 import { Session } from './models/session.model';
 import { SessionService } from './session.service';
 
 @Resolver(() => Session)
+@UseGuards(AuthenticateGuard)
 export class SessionResolver {
   constructor(private readonly sessionService: SessionService) {}
 

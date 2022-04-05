@@ -6,10 +6,9 @@ import { UpdateSessionInput } from './dto/update-session.input';
 @Injectable()
 export class SessionService {
   constructor(private readonly prisma: PrismaService) {}
-  async create(createSessionInput: CreateSessionInput) {
-    const { customerId, castId, planId } = createSessionInput;
+  create(createSessionInput: CreateSessionInput) {
     return this.prisma.session.create({
-      data: { customerId, castId, planId },
+      data: createSessionInput,
     });
   }
 
