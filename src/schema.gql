@@ -136,15 +136,17 @@ input UpdateItemInput {
 }
 
 input CreateSessionInput {
-  customerId: String!
-  castId: String!
+  customerId: Int!
+  castId: Int!
+  planId: Int!
   enteredAt: DateTime!
   exitedAtDate: DateTime!
 }
 
 input UpdateSessionInput {
-  customerId: String
-  castId: String
+  customerId: Int
+  castId: Int
+  planId: Int
   enteredAt: DateTime
   exitedAtDate: DateTime
   id: Int!

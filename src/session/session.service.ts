@@ -1,11 +1,25 @@
 import { Injectable } from '@nestjs/common';
+import { PrismaService } from 'src/prisma.service';
 import { CreateSessionInput } from './dto/create-session.input';
 import { UpdateSessionInput } from './dto/update-session.input';
 
 @Injectable()
 export class SessionService {
-  create(createSessionInput: CreateSessionInput) {
-    return 'This action adds a new session';
+  constructor(private readonly prisma: PrismaService) {}
+  async create(createSessionInput: CreateSessionInput) {
+    const { customerId, castId, planId } = createSessionInput;
+    const customer = await this.prisma.customer.findUnique({
+      where: { id: customerId },
+    });
+    const cast = await this.prisma.cast.findUnique({
+      where: { id: castId },
+    });
+    const plan = await this.prisma.plan.findUnique({
+      where: { id: planId },
+    });
+    return this.prisma.session.create({
+      data: { customerId, castId, planId },
+    });
   }
 
   findAll() {

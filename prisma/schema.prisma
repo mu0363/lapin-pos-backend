@@ -11,34 +11,34 @@ datasource db {
 }
 
 model User {
-  id        String     @id @default(uuid())
-  uid       String     @unique @db.VarChar(100)
-  isAdmin   Boolean    @default(false) @map("is_admin")
-  username  String     @map("username") @db.VarChar(100)
-  email     String     @unique @db.VarChar(191)
-  avatarUrl String     @map("avatar_url") @db.VarChar(255)
+  id        String   @id @default(uuid())
+  uid       String   @unique @db.VarChar(100)
+  isAdmin   Boolean  @default(false) @map("is_admin")
+  username  String   @map("username") @db.VarChar(100)
+  email     String   @unique @db.VarChar(191)
+  avatarUrl String   @map("avatar_url") @db.VarChar(255)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
+
   customers Customer[]
   casts     Cast[]
   sessions  Session[]
-  createdAt DateTime   @default(now()) @map("created_at")
-  updatedAt DateTime   @default(now()) @updatedAt @map("updated_at")
-
   @@map("user")
 }
 
 model Item {
-  id         Int       @id @default(autoincrement())
-  itemName   String    @unique @map(name: "item_name") @db.VarChar(255)
-  itemUrl    String    @map(name: "item_url")
+  id        Int      @id @default(autoincrement())
+  itemName  String   @unique @map(name: "item_name") @db.VarChar(255)
+  itemUrl   String   @map(name: "item_url")
+  price     Int
+  stock     Int
+  cost      Int
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @updatedAt @map(name: "updated_at")
+
   category   Category? @relation(fields: [categoryId], references: [id])
   categoryId Int       @map(name: "category_id")
-  price      Int
-  stock      Int
-  cost       Int
-  createdAt  DateTime  @default(now()) @map(name: "created_at")
-  updatedAt  DateTime  @updatedAt @map(name: "updated_at")
-
-  Order Order[]
+  Order      Order[]
   @@map(name: "items")
 }
 
@@ -46,10 +46,10 @@ model Category {
   id           Int      @id @default(autoincrement())
   categoryName String   @unique @map(name: "category_name") @db.VarChar(255)
   categoryIcon String   @map(name: "category_icon") @db.VarChar(255)
-  items        Item[]
   createdAt    DateTime @default(now()) @map(name: "created_at")
   updatedAt    DateTime @updatedAt @map(name: "updated_at")
 
+  items Item[]
   @@map(name: "categorys")
 }
 
@@ -75,6 +75,7 @@ model Plan {
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @updatedAt @map(name: "updated_at")
 
+  Session Session[]
   @@map(name: "plans")
 }
 
@@ -84,29 +85,31 @@ model Customer {
   customerName String    @unique @map(name: "customer_name") @db.VarChar(255)
   birthDay     DateTime? @map(name: "birth_day")
   receipt      String?   @db.VarChar(255)
-  cast         Cast      @relation(fields: [castId], references: [id])
-  castId       Int       @map(name: "cast_id")
   createdAt    DateTime  @default(now()) @map(name: "created_at")
   updatedAt    DateTime  @updatedAt @map(name: "updated_at")
 
   Session Session?
+  cast    Cast     @relation(fields: [castId], references: [id])
+  castId  Int      @map(name: "cast_id")
   User    User?    @relation(fields: [userId], references: [id])
   userId  String?
   @@map(name: "customers")
 }
 
 model Session {
-  id         Int      @id @default(autoincrement())
-  customer   Customer @relation(fields: [customerId], references: [id])
-  customerId Int      @unique @map(name: "customer_id")
-  cast       Cast     @relation(fields: [castId], references: [id])
-  castId     Int      @unique @map(name: "cast_id")
-  Order      Order[]
-  enteredAt  DateTime @default(now()) @map(name: "entered_at")
-  exitedAt   DateTime @map(name: "exited_at")
+  id        Int      @id @default(autoincrement())
+  enteredAt DateTime @default(now()) @map(name: "entered_at")
+  exitedAt  DateTime @default(now()) @map(name: "exited_at")
 
-  User   User?   @relation(fields: [userId], references: [id])
-  userId String?
+  Order      Order[]
+  customer   Customer @relation(fields: [customerId], references: [id])
+  customerId Int      @map(name: "customer_id")@unique
+  cast       Cast     @relation(fields: [castId], references: [id])
+  castId     Int      @map(name: "cast_id")
+  plan       Plan     @relation(fields: [planId], references: [id])
+  planId     Int      @map(name: "plan_id")
+  User       User?    @relation(fields: [userId], references: [id])
+  userId     String?
   @@map(name: "sessions")
 }
 
