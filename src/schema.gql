@@ -1,0 +1,173 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Customer {
+  id: Int!
+  customerKana: String!
+  customerName: String!
+  birthDay: DateTime!
+  receipt: String!
+  castId: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type User {
+  id: String!
+  uid: String!
+  isAdmin: Boolean!
+  username: String!
+  email: String!
+  avatarUrl: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Item {
+  id: Int!
+  categoryId: Int!
+  price: Int!
+  stock: Int!
+  cost: Int!
+  itemName: String!
+  itemUrl: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Session {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+type Cast {
+  id: Int!
+  castName: String!
+  castKana: String!
+  castIcon: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Plan {
+  id: Int!
+  planName: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Query {
+  users: [User!]!
+  user(uid: String!): User!
+  customers: [Customer!]!
+  customer(id: Int!): Customer!
+  items: [Item!]!
+  item(id: Int!): Item!
+  session(id: Int!): Session!
+  casts: [Cast!]!
+  cast(id: Int!): Cast!
+  plans: [Plan!]!
+  plan(id: Int!): Plan!
+}
+
+type Mutation {
+  initUser(createUserInput: CreateUserInput!): User!
+  updateUser(id: String!, updateUserInput: UpdateUserInput!): User!
+  removeUser(id: Int!): User!
+  createCustomer(createCustomerInput: CreateCustomerInput!): Customer!
+  updateCustomer(updateCustomerInput: UpdateCustomerInput!): Customer!
+  removeCustomer(id: Int!): Customer!
+  createItem(createItemInput: CreateItemInput!): Item!
+  updateItem(updateItemInput: UpdateItemInput!): Item!
+  removeItem(id: Int!): Item!
+  createSession(createSessionInput: CreateSessionInput!): Session!
+  updateSession(updateSessionInput: UpdateSessionInput!): Session!
+  removeSession(id: Int!): Session!
+  createCast(createCastInput: CreateCastInput!): Cast!
+  updateCast(updateCastInput: UpdateCastInput!): Cast!
+  removeCast(id: Int!): Cast!
+  createPlan(createPlanInput: CreatePlanInput!): Plan!
+  updatePlan(updatePlanInput: UpdatePlanInput!): Plan!
+  removePlan(id: Int!): Plan!
+}
+
+input CreateUserInput {
+  uid: String!
+  username: String!
+  email: String!
+  avatarUrl: String!
+  isAdmin: Boolean!
+}
+
+input UpdateUserInput {
+  uid: String
+  username: String
+  email: String
+  avatarUrl: String
+  isAdmin: Boolean
+}
+
+input CreateCustomerInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateCustomerInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateItemInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateItemInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateSessionInput {
+  customerId: String!
+  castId: String!
+  enteredAt: DateTime!
+  exitedAtDate: DateTime!
+}
+
+input UpdateSessionInput {
+  customerId: String
+  castId: String
+  enteredAt: DateTime
+  exitedAtDate: DateTime
+  id: Int!
+}
+
+input CreateCastInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateCastInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreatePlanInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdatePlanInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
