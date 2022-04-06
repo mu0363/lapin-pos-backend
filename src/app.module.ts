@@ -11,6 +11,7 @@ import { ItemModule } from './item/item.module';
 import { SessionModule } from './session/session.module';
 import { CastModule } from './cast/cast.module';
 import { PlanModule } from './plan/plan.module';
+import { OrderModule } from './order/order.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { PlanModule } from './plan/plan.module';
     SessionModule,
     CastModule,
     PlanModule,
+    OrderModule,
   ],
   controllers: [healthCheckController],
   providers: [PrismaService],

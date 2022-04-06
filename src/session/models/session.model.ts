@@ -18,9 +18,15 @@ export class Session {
   @Field(() => PlanModel)
   plan: Plan;
 
-  customerId: string;
-  castId: string;
-  planId: string;
+  @Field(() => Int)
+  customerId: number;
+
+  @Field(() => Int)
+  castId: number;
+
+  @Field(() => Int)
+  planId: number;
+
   userId?: string;
   enteredAt: Date;
   exitedAt: Date;

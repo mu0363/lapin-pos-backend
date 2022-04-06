@@ -2,7 +2,8 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["interactiveTransactions"]
 }
 
 datasource db {
@@ -114,13 +115,13 @@ model Session {
 }
 
 model Order {
-  id        Int      @id @default(autoincrement())
-  item      Item?    @relation(fields: [itemId], references: [id])
-  itemId    Int      @unique @map(name: "item_id")
+  id        Int     @id @default(autoincrement())
+  item      Item    @relation(fields: [itemId], references: [id])
+  itemId    Int     @map(name: "item_id")
   count     Int
   total     Int
-  Session   Session? @relation(fields: [sessionId], references: [id])
-  sessionId Int?
+  Session   Session @relation(fields: [sessionId], references: [id])
+  sessionId Int
 
   @@map(name: "orders")
 }
