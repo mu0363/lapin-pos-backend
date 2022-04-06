@@ -19,12 +19,12 @@ CREATE TABLE `items` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `item_name` VARCHAR(255) NOT NULL,
     `item_url` VARCHAR(191) NOT NULL,
-    `category_id` INTEGER NOT NULL,
     `price` INTEGER NOT NULL,
     `stock` INTEGER NOT NULL,
     `cost` INTEGER NOT NULL,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updated_at` DATETIME(3) NOT NULL,
+    `categoryId` INTEGER NOT NULL,
 
     UNIQUE INDEX `items_item_name_key`(`item_name`),
     PRIMARY KEY (`id`)
@@ -76,9 +76,9 @@ CREATE TABLE `customers` (
     `customer_name` VARCHAR(255) NOT NULL,
     `birth_day` DATETIME(3) NULL,
     `receipt` VARCHAR(255) NULL,
-    `cast_id` INTEGER NOT NULL,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updated_at` DATETIME(3) NOT NULL,
+    `castId` INTEGER NOT NULL,
     `userId` VARCHAR(191) NULL,
 
     UNIQUE INDEX `customers_customer_kana_key`(`customer_kana`),
@@ -89,14 +89,13 @@ CREATE TABLE `customers` (
 -- CreateTable
 CREATE TABLE `sessions` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `entered_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `exited_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `customer_id` INTEGER NOT NULL,
     `cast_id` INTEGER NOT NULL,
-    `entered_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `exited_at` DATETIME(3) NOT NULL,
+    `plan_id` INTEGER NOT NULL,
     `userId` VARCHAR(191) NULL,
 
-    UNIQUE INDEX `sessions_customer_id_key`(`customer_id`),
-    UNIQUE INDEX `sessions_cast_id_key`(`cast_id`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -113,7 +112,7 @@ CREATE TABLE `orders` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- AddForeignKey
-ALTER TABLE `items` ADD CONSTRAINT `items_category_id_fkey` FOREIGN KEY (`category_id`) REFERENCES `categorys`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `items` ADD CONSTRAINT `items_categoryId_fkey` FOREIGN KEY (`categoryId`) REFERENCES `categorys`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `casts` ADD CONSTRAINT `casts_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `user`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
@@ -122,13 +121,16 @@ ALTER TABLE `casts` ADD CONSTRAINT `casts_userId_fkey` FOREIGN KEY (`userId`) RE
 ALTER TABLE `customers` ADD CONSTRAINT `customers_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `user`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `customers` ADD CONSTRAINT `customers_cast_id_fkey` FOREIGN KEY (`cast_id`) REFERENCES `casts`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `customers` ADD CONSTRAINT `customers_castId_fkey` FOREIGN KEY (`castId`) REFERENCES `casts`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `sessions` ADD CONSTRAINT `sessions_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `user`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `sessions` ADD CONSTRAINT `sessions_cast_id_fkey` FOREIGN KEY (`cast_id`) REFERENCES `casts`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `sessions` ADD CONSTRAINT `sessions_plan_id_fkey` FOREIGN KEY (`plan_id`) REFERENCES `plans`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `sessions` ADD CONSTRAINT `sessions_customer_id_fkey` FOREIGN KEY (`customer_id`) REFERENCES `customers`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
