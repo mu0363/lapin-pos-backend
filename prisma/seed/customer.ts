@@ -5,8 +5,8 @@ export const customer = async () => {
   await prisma.customer.createMany({
     data: [
       {
-        customerKana: 'タナカ',
-        customerName: '田中',
+        customerKana: 'タナカ カクエイ',
+        customerName: '田中 角栄',
         birthDay: '1970-08-07T11:57:57.012Z',
         receipt: '株式会社 田中',
         castId: 1,

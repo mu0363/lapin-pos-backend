@@ -1,13 +1,14 @@
-import { ParseUUIDPipe } from '@nestjs/common';
+import { ParseUUIDPipe, UseGuards } from '@nestjs/common';
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { GetCurrentUserId } from 'src/common/decorators/current-user-id.decorator';
+import { AuthenticateGuard } from 'src/common/guards/authenticate.guard';
 import { CreateSessionInput } from './dto/create-session.input';
 import { UpdateSessionInput } from './dto/update-session.input';
 import { Session } from './models/session.model';
 import { SessionService } from './session.service';
 
 @Resolver(() => Session)
-// @UseGuards(AuthenticateGuard)
+@UseGuards(AuthenticateGuard)
 export class SessionResolver {
   constructor(private readonly sessionService: SessionService) {}
 
@@ -20,15 +21,9 @@ export class SessionResolver {
   }
 
   @Query(() => [Session], { name: 'sessions' })
-  findAll() {
-    const userId = '6523fe42-8eb3-4267-84ea-68eb1d59d0c5';
+  findAll(@GetCurrentUserId('userId', new ParseUUIDPipe()) userId: string) {
     return this.sessionService.findAll(userId);
   }
-
-  // @Query(() => [Session], { name: 'sessions' })
-  // findAll(@GetCurrentUserId('userId', new ParseUUIDPipe()) userId: string) {
-  //   return this.sessionService.findAll(userId);
-  // }
 
   @Query(() => Session, { name: 'session' })
   findOne(@Args('id', { type: () => Int }) id: number) {
