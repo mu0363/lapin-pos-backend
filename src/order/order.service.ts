@@ -10,13 +10,13 @@ export class OrderService {
     // prisma schemaに以下を追加
     // previewFeatures = ["interactiveTransactions"]
     return await this.prisma.$transaction(async (prisma) => {
-      const initialOrder = await this.prisma.order.create({
+      const initialOrder = await prisma.order.create({
         data: createOrderInput,
       });
-      const orderItem = await this.prisma.item.findUnique({
+      const orderItem = await prisma.item.findUnique({
         where: { id: initialOrder.itemId },
       });
-      return await this.prisma.order.update({
+      return await prisma.order.update({
         where: { id: initialOrder.id },
         data: { count: orderItem.price },
       });
@@ -24,7 +24,7 @@ export class OrderService {
   }
 
   findAll() {
-    return `This action returns all order`;
+    return this.prisma.order.findMany();
   }
 
   findOne(id: number) {
