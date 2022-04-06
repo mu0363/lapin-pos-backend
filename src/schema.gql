@@ -41,16 +41,6 @@ type Item {
   updatedAt: DateTime!
 }
 
-type Session {
-  id: Int!
-  customerId: String!
-  castId: String!
-  planId: String!
-  userId: String
-  enteredAt: DateTime!
-  exitedAt: DateTime!
-}
-
 type Cast {
   id: Int!
   castName: String!
@@ -65,6 +55,19 @@ type Plan {
   planName: String!
   createdAt: DateTime!
   updatedAt: DateTime!
+}
+
+type Session {
+  id: Int!
+  customer: Customer
+  cast: Cast
+  plan: Plan
+  customerId: String!
+  castId: String!
+  planId: String!
+  userId: String
+  enteredAt: DateTime!
+  exitedAt: DateTime!
 }
 
 type Query {

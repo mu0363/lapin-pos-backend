@@ -21,7 +21,7 @@ export class SessionResolver {
 
   @Query(() => [Session], { name: 'sessions' })
   findAll() {
-    const userId = 'bd2a7dbb-9d6e-4fe3-a859-54f2a4a2a79c';
+    const userId = '35909efc-d445-4027-855c-aa7f758b143f';
     return this.sessionService.findAll(userId);
   }
 
