@@ -52,6 +52,7 @@ type Cast {
 
 type Plan {
   id: Int!
+  price: Int!
   planName: String!
   createdAt: DateTime!
   updatedAt: DateTime!
