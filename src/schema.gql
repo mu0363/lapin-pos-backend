@@ -59,9 +59,9 @@ type Plan {
 
 type Session {
   id: Int!
-  customer: Customer
-  cast: Cast
-  plan: Plan
+  customer: Customer!
+  cast: Cast!
+  plan: Plan!
   customerId: String!
   castId: String!
   planId: String!

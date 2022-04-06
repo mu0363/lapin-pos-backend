@@ -9,13 +9,13 @@ export class Session {
   @Field(() => Int)
   id: number;
 
-  @Field(() => CustomerModel, { nullable: true })
+  @Field(() => CustomerModel)
   customer: Customer;
 
-  @Field(() => CastModel, { nullable: true })
+  @Field(() => CastModel)
   cast: Cast;
 
-  @Field(() => PlanModel, { nullable: true })
+  @Field(() => PlanModel)
   plan: Plan;
 
   customerId: string;

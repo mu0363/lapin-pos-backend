@@ -17,6 +17,8 @@ export class SessionService {
       where: { userId },
       include: {
         customer: true,
+        cast: true,
+        plan: true,
       },
     });
   }
