@@ -19,6 +19,7 @@
     "docker:down": "docker-compose -f ./docker/docker-compose.yml -p lapin-pos-db down",
     "docker:reset": "yarn docker:down && yarn docker:up",
     "migrate": "yarn prisma migrate dev --name init && npx ts-node prisma/seed/start.ts",
+    "reset": "yarn prisma migrate reset --skip-seed",
     "gen-types": "graphql-codegen --config codegen.yml",
     "prisma:generate": "prisma generate --watch",
     "test": "jest",

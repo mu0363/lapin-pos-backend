@@ -14,10 +14,10 @@ async function main() {
   await prisma.customer.deleteMany();
   await prisma.cast.deleteMany();
   await prisma.user.deleteMany();
+  await cast();
   await plan();
   await category();
   await item();
-  await cast();
   await customer();
 }
 

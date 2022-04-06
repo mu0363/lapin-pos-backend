@@ -12,8 +12,13 @@ export class SessionService {
     });
   }
 
-  findAll() {
-    return `This action returns all session`;
+  findAll(userId: string) {
+    return this.prisma.session.findMany({
+      where: { userId },
+      include: {
+        customer: true,
+      },
+    });
   }
 
   findOne(id: number) {

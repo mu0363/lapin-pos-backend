@@ -74,6 +74,7 @@ type Query {
   customer(id: Int!): Customer!
   items: [Item!]!
   item(id: Int!): Item!
+  sessions: [Session!]!
   session(id: Int!): Session!
   casts: [Cast!]!
   cast(id: Int!): Cast!

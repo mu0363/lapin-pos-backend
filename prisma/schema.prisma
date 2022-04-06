@@ -36,8 +36,8 @@ model Item {
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @updatedAt @map(name: "updated_at")
 
-  category   Category? @relation(fields: [categoryId], references: [id])
-  categoryId Int       @map(name: "category_id")
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId Int
   Order      Order[]
   @@map(name: "items")
 }
@@ -90,7 +90,7 @@ model Customer {
 
   Session Session[]
   cast    Cast      @relation(fields: [castId], references: [id])
-  castId  Int       @map(name: "cast_id")
+  castId  Int
   User    User?     @relation(fields: [userId], references: [id])
   userId  String?
   @@map(name: "customers")
