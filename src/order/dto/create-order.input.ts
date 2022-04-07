@@ -1,5 +1,5 @@
 import { InputType, Int, Field } from '@nestjs/graphql';
-import { IsInt, Max } from 'class-validator';
+import { IsInt, Max, IsUUID, MaxLength } from 'class-validator';
 
 @InputType()
 export class CreateOrderInput {
@@ -22,4 +22,9 @@ export class CreateOrderInput {
   @IsInt()
   @Max(1000)
   itemId: number;
+
+  @Field()
+  @IsUUID()
+  @MaxLength(50)
+  userId: string;
 }

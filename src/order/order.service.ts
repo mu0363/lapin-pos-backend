@@ -6,25 +6,25 @@ import { UpdateOrderInput } from './dto/update-order.input';
 @Injectable()
 export class OrderService {
   constructor(private readonly prisma: PrismaService) {}
-  async create(createOrderInput: CreateOrderInput) {
+  create(createOrderInput: CreateOrderInput) {
     // prisma schemaに以下を追加
     // previewFeatures = ["interactiveTransactions"]
-    return await this.prisma.$transaction(async (prisma) => {
-      const initialOrder = await prisma.order.create({
-        data: createOrderInput,
-      });
-      const orderItem = await prisma.item.findUnique({
-        where: { id: initialOrder.itemId },
-      });
-      return await prisma.order.update({
-        where: { id: initialOrder.id },
-        data: { count: orderItem.price },
-      });
+    return this.prisma.order.create({
+      data: createOrderInput,
+      include: {
+        item: true,
+      },
     });
   }
 
-  findAll() {
-    return this.prisma.order.findMany();
+  findAll(userId: string) {
+    return this.prisma.order.findMany({
+      where: { userId },
+      include: {
+        item: true,
+        session: true,
+      },
+    });
   }
 
   findOne(id: number) {

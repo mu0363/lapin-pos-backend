@@ -1,7 +1,8 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
-import { Cast, Customer, Plan } from '@prisma/client';
+import { Cast, Customer, Order, Plan } from '@prisma/client';
 import { Cast as CastModel } from 'src/cast/models/cast.model';
 import { Customer as CustomerModel } from 'src/customer/models/customer.model';
+import { Order as OrderModel } from 'src/order/models/order.model';
 import { Plan as PlanModel } from 'src/plan/models/plan.model';
 
 @ObjectType()
@@ -17,6 +18,9 @@ export class Session {
 
   @Field(() => PlanModel)
   plan: Plan;
+
+  @Field(() => [OrderModel], { nullable: true })
+  order?: Order;
 
   @Field(() => Int)
   customerId: number;

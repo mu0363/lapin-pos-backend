@@ -24,7 +24,7 @@ model User {
   customers Customer[]
   casts     Cast[]
   sessions  Session[]
-  Order     Order[]
+  order     Order[]
   @@map("user")
 }
 
@@ -40,7 +40,7 @@ model Item {
 
   category   Category @relation(fields: [categoryId], references: [id])
   categoryId Int
-  Order      Order[]
+  order      Order[]
   @@map(name: "items")
 }
 
@@ -64,8 +64,8 @@ model Cast {
   updatedAt DateTime @updatedAt @map(name: "updated_at")
 
   customers Customer[]
-  Session   Session[]
-  User      User?      @relation(fields: [userId], references: [id])
+  session   Session[]
+  user      User?      @relation(fields: [userId], references: [id])
   userId    String?
   @@map(name: "casts")
 }
@@ -77,7 +77,7 @@ model Plan {
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @updatedAt @map(name: "updated_at")
 
-  Session Session[]
+  session Session[]
   @@map(name: "plans")
 }
 
@@ -90,10 +90,10 @@ model Customer {
   createdAt    DateTime  @default(now()) @map(name: "created_at")
   updatedAt    DateTime  @updatedAt @map(name: "updated_at")
 
-  Session Session[]
+  session Session[]
   cast    Cast      @relation(fields: [castId], references: [id])
   castId  Int
-  User    User?     @relation(fields: [userId], references: [id])
+  user    User?     @relation(fields: [userId], references: [id])
   userId  String?
   @@map(name: "customers")
 }
@@ -103,14 +103,14 @@ model Session {
   enteredAt DateTime @default(now()) @map(name: "entered_at")
   exitedAt  DateTime @default(now()) @map(name: "exited_at")
 
-  Order      Order[]
+  order      Order[]
   customer   Customer @relation(fields: [customerId], references: [id])
   customerId Int      @map(name: "customer_id")
   cast       Cast     @relation(fields: [castId], references: [id])
   castId     Int      @map(name: "cast_id")
   plan       Plan     @relation(fields: [planId], references: [id])
   planId     Int      @map(name: "plan_id")
-  User       User?    @relation(fields: [userId], references: [id])
+  user       User?    @relation(fields: [userId], references: [id])
   userId     String?
   @@map(name: "sessions")
 }
@@ -121,11 +121,11 @@ model Order {
   itemId    Int      @map(name: "item_id")
   count     Int
   total     Int
-  Session   Session  @relation(fields: [sessionId], references: [id])
+  session   Session  @relation(fields: [sessionId], references: [id])
   sessionId Int
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @updatedAt @map(name: "updated_at")
-  User      User?    @relation(fields: [userId], references: [id])
+  user      User?    @relation(fields: [userId], references: [id])
   userId    String?
 
   @@map(name: "orders")

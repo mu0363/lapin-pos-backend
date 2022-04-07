@@ -19,6 +19,11 @@ export class SessionService {
         customer: true,
         cast: true,
         plan: true,
+        order: {
+          include: {
+            item: true,
+          },
+        },
       },
     });
   }

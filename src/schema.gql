@@ -50,6 +50,18 @@ type Cast {
   updatedAt: DateTime!
 }
 
+type Order {
+  id: Int!
+  item: Item!
+  session: Session!
+  count: Int!
+  total: Int!
+  itemId: Int!
+  userId: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
 type Plan {
   id: Int!
   price: Int!
@@ -63,23 +75,13 @@ type Session {
   customer: Customer!
   cast: Cast!
   plan: Plan!
+  order: [Order!]
   customerId: Int!
   castId: Int!
   planId: Int!
   userId: String
   enteredAt: DateTime!
   exitedAt: DateTime!
-}
-
-type Order {
-  id: Int!
-  item: Item!
-  session: Session!
-  count: Int!
-  total: Int!
-  itemId: Int!
-  createdAt: DateTime!
-  updatedAt: DateTime!
 }
 
 type Query {
@@ -201,6 +203,7 @@ input CreateOrderInput {
   total: Int!
   sessionId: Int!
   itemId: Int!
+  userId: String!
 }
 
 input UpdateOrderInput {
@@ -208,5 +211,6 @@ input UpdateOrderInput {
   total: Int
   sessionId: Int
   itemId: Int
+  userId: String
   id: Int!
 }

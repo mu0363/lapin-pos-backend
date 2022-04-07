@@ -23,6 +23,7 @@ export class Order {
   @Field(() => Int)
   itemId: number;
 
+  userId?: string;
   createdAt: Date;
   updatedAt: Date;
 }
