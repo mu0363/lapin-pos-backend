@@ -13,6 +13,7 @@ export class OrderService {
       data: createOrderInput,
       include: {
         item: true,
+        session: true,
       },
     });
   }

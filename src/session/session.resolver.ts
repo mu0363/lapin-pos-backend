@@ -3,6 +3,7 @@ import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { GetCurrentUserId } from 'src/common/decorators/current-user-id.decorator';
 import { AuthenticateGuard } from 'src/common/guards/authenticate.guard';
 import { CreateSessionInput } from './dto/create-session.input';
+import { RemoveSessionInput } from './dto/remove-session.input';
 import { UpdateSessionInput } from './dto/update-session.input';
 import { Session } from './models/session.model';
 import { SessionService } from './session.service';
@@ -41,7 +42,10 @@ export class SessionResolver {
   }
 
   @Mutation(() => Session)
-  removeSession(@Args('id', { type: () => Int }) id: number) {
-    return this.sessionService.remove(id);
+  removeSession(
+    @GetCurrentUserId('userId', new ParseUUIDPipe()) userId: string,
+    @Args('removeSessionInput') removeSessionInput: RemoveSessionInput,
+  ) {
+    return this.sessionService.remove(removeSessionInput, userId);
   }
 }

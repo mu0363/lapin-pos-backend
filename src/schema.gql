@@ -53,7 +53,7 @@ type Cast {
 type Order {
   id: Int!
   item: Item!
-  session: Session!
+  session: Session
   count: Int!
   total: Int!
   itemId: Int!
@@ -113,7 +113,7 @@ type Mutation {
   removeItem(id: Int!): Item!
   createSession(createSessionInput: CreateSessionInput!): Session!
   updateSession(updateSessionInput: UpdateSessionInput!): Session!
-  removeSession(id: Int!): Session!
+  removeSession(removeSessionInput: RemoveSessionInput!): Session!
   createCast(createCastInput: CreateCastInput!): Cast!
   updateCast(updateCastInput: UpdateCastInput!): Cast!
   removeCast(id: Int!): Cast!
@@ -173,6 +173,10 @@ input UpdateSessionInput {
   customerId: Int
   castId: Int
   planId: Int
+  id: Int!
+}
+
+input RemoveSessionInput {
   id: Int!
 }
 

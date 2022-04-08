@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { CreateSessionInput } from './dto/create-session.input';
+import { RemoveSessionInput } from './dto/remove-session.input';
 import { UpdateSessionInput } from './dto/update-session.input';
 
 @Injectable()
@@ -9,6 +10,16 @@ export class SessionService {
   create(createSessionInput: CreateSessionInput, userId: string) {
     return this.prisma.session.create({
       data: { ...createSessionInput, userId },
+      include: {
+        customer: true,
+        cast: true,
+        plan: true,
+        order: {
+          include: {
+            item: true,
+          },
+        },
+      },
     });
   }
 
@@ -36,7 +47,24 @@ export class SessionService {
     return `This action updates a #${id} session`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} session`;
+  remove(removeSessionInput: RemoveSessionInput, userId: string) {
+    return this.prisma.session.delete({
+      where: {
+        id_userId: {
+          id: removeSessionInput.id,
+          userId,
+        },
+      },
+      include: {
+        customer: true,
+        cast: true,
+        plan: true,
+        order: {
+          include: {
+            item: true,
+          },
+        },
+      },
+    });
   }
 }

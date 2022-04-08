@@ -110,8 +110,10 @@ model Session {
   castId     Int      @map(name: "cast_id")
   plan       Plan     @relation(fields: [planId], references: [id])
   planId     Int      @map(name: "plan_id")
-  user       User?    @relation(fields: [userId], references: [id])
-  userId     String?
+  user       User     @relation(fields: [userId], references: [id])
+  userId     String
+
+  @@unique([id, userId])
   @@map(name: "sessions")
 }
 
@@ -121,7 +123,7 @@ model Order {
   itemId    Int      @map(name: "item_id")
   count     Int
   total     Int
-  session   Session  @relation(fields: [sessionId], references: [id])
+  session   Session  @relation(fields: [sessionId], references: [id], onDelete: Cascade)
   sessionId Int
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @updatedAt @map(name: "updated_at")

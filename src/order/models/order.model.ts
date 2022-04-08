@@ -11,8 +11,8 @@ export class Order {
   @Field(() => ItemModel)
   item: Item;
 
-  @Field(() => SessionModel)
-  session: Session;
+  @Field(() => SessionModel, { nullable: true })
+  session?: Session;
 
   @Field(() => Int)
   count: number;
