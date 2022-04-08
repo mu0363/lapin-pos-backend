@@ -207,7 +207,6 @@ input CreateOrderInput {
   total: Int!
   sessionId: Int!
   itemId: Int!
-  userId: String!
 }
 
 input UpdateOrderInput {
@@ -215,7 +214,6 @@ input UpdateOrderInput {
   total: Int
   sessionId: Int
   itemId: Int
-  userId: String
   id: Int!
 }
 

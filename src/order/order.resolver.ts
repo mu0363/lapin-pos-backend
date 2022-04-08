@@ -14,8 +14,11 @@ export class OrderResolver {
   constructor(private readonly orderService: OrderService) {}
 
   @Mutation(() => Order)
-  createOrder(@Args('createOrderInput') createOrderInput: CreateOrderInput) {
-    return this.orderService.create(createOrderInput);
+  createOrder(
+    @GetCurrentUserId('userId', new ParseUUIDPipe()) userId: string,
+    @Args('createOrderInput') createOrderInput: CreateOrderInput,
+  ) {
+    return this.orderService.create(createOrderInput, userId);
   }
 
   @Query(() => [Order], { name: 'orders' })

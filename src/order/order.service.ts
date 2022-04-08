@@ -7,11 +7,9 @@ import { UpdateOrderInput } from './dto/update-order.input';
 @Injectable()
 export class OrderService {
   constructor(private readonly prisma: PrismaService) {}
-  create(createOrderInput: CreateOrderInput) {
-    // prisma schemaに以下を追加
-    // previewFeatures = ["interactiveTransactions"]
+  create(createOrderInput: CreateOrderInput, userId: string) {
     return this.prisma.order.create({
-      data: createOrderInput,
+      data: { ...createOrderInput, userId },
       include: {
         item: true,
         session: true,
