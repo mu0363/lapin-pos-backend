@@ -122,7 +122,7 @@ type Mutation {
   removePlan(id: Int!): Plan!
   createOrder(createOrderInput: CreateOrderInput!): Order!
   updateOrder(updateOrderInput: UpdateOrderInput!): Order!
-  removeOrder(id: Int!): Order!
+  removeOrder(removeOrderInput: RemoveOrderInput!): Order!
 }
 
 input CreateUserInput {
@@ -216,5 +216,9 @@ input UpdateOrderInput {
   sessionId: Int
   itemId: Int
   userId: String
+  id: Int!
+}
+
+input RemoveOrderInput {
   id: Int!
 }

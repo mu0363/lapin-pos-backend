@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { CreateOrderInput } from './dto/create-order.input';
+import { RemoveOrderInput } from './dto/remove-order.input';
 import { UpdateOrderInput } from './dto/update-order.input';
 
 @Injectable()
@@ -36,7 +37,18 @@ export class OrderService {
     return `This action updates a #${id} order`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} order`;
+  remove(removeOrderInput: RemoveOrderInput, userId: string) {
+    return this.prisma.order.delete({
+      where: {
+        id_userId: {
+          id: removeOrderInput.id,
+          userId,
+        },
+      },
+      include: {
+        item: true,
+        session: true,
+      },
+    });
   }
 }

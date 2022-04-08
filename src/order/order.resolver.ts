@@ -3,6 +3,7 @@ import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { GetCurrentUserId } from 'src/common/decorators/current-user-id.decorator';
 import { AuthenticateGuard } from 'src/common/guards/authenticate.guard';
 import { CreateOrderInput } from './dto/create-order.input';
+import { RemoveOrderInput } from './dto/remove-order.input';
 import { UpdateOrderInput } from './dto/update-order.input';
 import { Order } from './models/order.model';
 import { OrderService } from './order.service';
@@ -33,7 +34,10 @@ export class OrderResolver {
   }
 
   @Mutation(() => Order)
-  removeOrder(@Args('id', { type: () => Int }) id: number) {
-    return this.orderService.remove(id);
+  removeOrder(
+    @GetCurrentUserId('userId', new ParseUUIDPipe()) userId: string,
+    @Args('removeOrderInput') removeOrderInput: RemoveOrderInput,
+  ) {
+    return this.orderService.remove(removeOrderInput, userId);
   }
 }
