@@ -27,12 +27,23 @@ export class OrderService {
     });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} order`;
-  }
-
-  update(id: number, updateOrderInput: UpdateOrderInput) {
-    return `This action updates a #${id} order`;
+  update(updateOrderInput: UpdateOrderInput, userId: string) {
+    return this.prisma.order.update({
+      where: {
+        id_userId: {
+          id: updateOrderInput.id,
+          userId,
+        },
+      },
+      data: {
+        count: updateOrderInput.count,
+        total: updateOrderInput.total,
+      },
+      include: {
+        item: true,
+        session: true,
+      },
+    });
   }
 
   remove(removeOrderInput: RemoveOrderInput, userId: string) {

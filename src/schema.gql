@@ -98,7 +98,6 @@ type Query {
   plans: [Plan!]!
   plan(id: Int!): Plan!
   orders: [Order!]!
-  order(id: Int!): Order!
 }
 
 type Mutation {
@@ -210,10 +209,10 @@ input CreateOrderInput {
 }
 
 input UpdateOrderInput {
-  count: Int
-  total: Int
-  sessionId: Int
-  itemId: Int
+  count: Int!
+  total: Int!
+  sessionId: Int!
+  itemId: Int!
   id: Int!
 }
 

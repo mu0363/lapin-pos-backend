@@ -1,5 +1,5 @@
 import { ParseUUIDPipe, UseGuards } from '@nestjs/common';
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { GetCurrentUserId } from 'src/common/decorators/current-user-id.decorator';
 import { AuthenticateGuard } from 'src/common/guards/authenticate.guard';
 import { CreateOrderInput } from './dto/create-order.input';
@@ -26,14 +26,12 @@ export class OrderResolver {
     return this.orderService.findAll(userId);
   }
 
-  @Query(() => Order, { name: 'order' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.orderService.findOne(id);
-  }
-
   @Mutation(() => Order)
-  updateOrder(@Args('updateOrderInput') updateOrderInput: UpdateOrderInput) {
-    return this.orderService.update(updateOrderInput.id, updateOrderInput);
+  updateOrder(
+    @GetCurrentUserId('userId', new ParseUUIDPipe()) userId: string,
+    @Args('updateOrderInput') updateOrderInput: UpdateOrderInput,
+  ) {
+    return this.orderService.update(updateOrderInput, userId);
   }
 
   @Mutation(() => Order)
