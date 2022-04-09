@@ -92,7 +92,6 @@ type Query {
   items: [Item!]!
   item(id: Int!): Item!
   sessions: [Session!]!
-  session(id: Int!): Session!
   casts: [Cast!]!
   cast(id: Int!): Cast!
   plans: [Plan!]!
@@ -171,7 +170,7 @@ input CreateSessionInput {
 input UpdateSessionInput {
   customerId: Int
   castId: Int
-  planId: Int
+  planId: Int!
   id: Int!
 }
 

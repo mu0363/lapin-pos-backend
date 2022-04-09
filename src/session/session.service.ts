@@ -39,12 +39,28 @@ export class SessionService {
     });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} session`;
-  }
-
-  update(id: number, updateSessionInput: UpdateSessionInput) {
-    return `This action updates a #${id} session`;
+  update(updateSessionInput: UpdateSessionInput, userId: string) {
+    return this.prisma.session.update({
+      where: {
+        id_userId: {
+          id: updateSessionInput.id,
+          userId,
+        },
+      },
+      include: {
+        customer: true,
+        cast: true,
+        plan: true,
+        order: {
+          include: {
+            item: true,
+          },
+        },
+      },
+      data: {
+        planId: updateSessionInput.planId,
+      },
+    });
   }
 
   remove(removeSessionInput: RemoveSessionInput, userId: string) {
