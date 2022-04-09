@@ -9,6 +9,7 @@ type Customer {
   birthDay: DateTime!
   receipt: String!
   castId: String!
+  lastVisitDate: DateTime!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -46,6 +47,7 @@ type Cast {
   castName: String!
   castKana: String!
   castIcon: String!
+  lastWorkDate: DateTime!
   createdAt: DateTime!
   updatedAt: DateTime!
 }

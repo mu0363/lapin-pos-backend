@@ -7,6 +7,7 @@ export class Cast {
   castName: string;
   castKana: string;
   castIcon: string;
+  lastWorkDate: Date;
   createdAt: Date;
   updatedAt: Date;
 }

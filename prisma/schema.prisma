@@ -56,12 +56,13 @@ model Category {
 }
 
 model Cast {
-  id        Int      @id @default(autoincrement())
-  castName  String   @unique @map(name: "cast_name") @db.VarChar(255)
-  castKana  String   @unique @map(name: "cast_kana") @db.VarChar(255)
-  castIcon  String   @map(name: "cast_icon") @db.VarChar(255)
-  createdAt DateTime @default(now()) @map(name: "created_at")
-  updatedAt DateTime @updatedAt @map(name: "updated_at")
+  id           Int      @id @default(autoincrement())
+  castName     String   @unique @map(name: "cast_name") @db.VarChar(255)
+  castKana     String   @unique @map(name: "cast_kana") @db.VarChar(255)
+  castIcon     String   @map(name: "cast_icon") @db.VarChar(255)
+  lastWorkDate DateTime @default(now()) @map("last_work_date")
+  createdAt    DateTime @default(now()) @map(name: "created_at")
+  updatedAt    DateTime @updatedAt @map(name: "updated_at")
 
   customers Customer[]
   session   Session[]
@@ -82,13 +83,14 @@ model Plan {
 }
 
 model Customer {
-  id           Int       @id @default(autoincrement())
-  customerKana String    @unique @map(name: "customer_kana") @db.VarChar(255)
-  customerName String    @unique @map(name: "customer_name") @db.VarChar(255)
-  birthDay     DateTime? @map(name: "birth_day")
-  receipt      String?   @db.VarChar(255)
-  createdAt    DateTime  @default(now()) @map(name: "created_at")
-  updatedAt    DateTime  @updatedAt @map(name: "updated_at")
+  id            Int       @id @default(autoincrement())
+  customerKana  String    @unique @map(name: "customer_kana") @db.VarChar(255)
+  customerName  String    @unique @map(name: "customer_name") @db.VarChar(255)
+  birthDay      DateTime? @map(name: "birth_day")
+  receipt       String?   @db.VarChar(255)
+  lastVisitDate DateTime  @default(now()) @map("last_visit_date")
+  createdAt     DateTime  @default(now()) @map(name: "created_at")
+  updatedAt     DateTime  @updatedAt @map(name: "updated_at")
 
   session Session[]
   cast    Cast      @relation(fields: [castId], references: [id])

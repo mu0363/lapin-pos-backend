@@ -9,6 +9,7 @@ export class Customer {
   birthDay: Date;
   receipt: string;
   castId: string;
+  lastVisitDate: Date;
   createdAt: Date;
   updatedAt: Date;
 }
