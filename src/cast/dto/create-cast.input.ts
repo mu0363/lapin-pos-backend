@@ -1,7 +1,17 @@
-import { InputType, Int, Field } from '@nestjs/graphql';
+import { InputType } from '@nestjs/graphql';
+import { IsNotEmpty, MaxLength } from 'class-validator';
 
 @InputType()
 export class CreateCastInput {
-  @Field(() => Int, { description: 'Example field (placeholder)' })
-  exampleField: number;
+  @IsNotEmpty()
+  @MaxLength(100)
+  castName: string;
+
+  @IsNotEmpty()
+  @MaxLength(100)
+  castKana: string;
+
+  @IsNotEmpty()
+  @MaxLength(10)
+  castIcon: string;
 }

@@ -2,14 +2,12 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Customer {
+type Cast {
   id: Int!
-  customerKana: String!
-  customerName: String!
-  birthDay: DateTime!
-  receipt: String!
-  castId: String!
-  lastVisitDate: DateTime!
+  castName: String!
+  castKana: String!
+  castIcon: String!
+  lastWorkDate: DateTime
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -18,6 +16,19 @@ type Customer {
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
 scalar DateTime
+
+type Customer {
+  id: Int!
+  cast: Cast
+  castId: Int
+  customerKana: String!
+  customerName: String!
+  birthDay: DateTime
+  receipt: String
+  lastVisitDate: DateTime!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
 
 type User {
   id: String!
@@ -38,16 +49,6 @@ type Item {
   cost: Int!
   itemName: String!
   itemUrl: String!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-}
-
-type Cast {
-  id: Int!
-  castName: String!
-  castKana: String!
-  castIcon: String!
-  lastWorkDate: DateTime!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -90,12 +91,10 @@ type Query {
   users: [User!]!
   user(uid: String!): User!
   customers: [Customer!]!
-  customer(id: Int!): Customer!
   items: [Item!]!
   item(id: Int!): Item!
   sessions: [Session!]!
   casts: [Cast!]!
-  cast(id: Int!): Cast!
   plans: [Plan!]!
   plan(id: Int!): Plan!
   orders: [Order!]!
@@ -107,7 +106,7 @@ type Mutation {
   removeUser(id: Int!): User!
   createCustomer(createCustomerInput: CreateCustomerInput!): Customer!
   updateCustomer(updateCustomerInput: UpdateCustomerInput!): Customer!
-  removeCustomer(id: Int!): Customer!
+  removeCustomer(removeCustomerInput: RemoveCustomerInput!): Customer!
   createItem(createItemInput: CreateItemInput!): Item!
   updateItem(updateItemInput: UpdateItemInput!): Item!
   removeItem(id: Int!): Item!
@@ -116,7 +115,7 @@ type Mutation {
   removeSession(removeSessionInput: RemoveSessionInput!): Session!
   createCast(createCastInput: CreateCastInput!): Cast!
   updateCast(updateCastInput: UpdateCastInput!): Cast!
-  removeCast(id: Int!): Cast!
+  removeCast(removeCastInput: RemoveCastInput!): Cast!
   createPlan(createPlanInput: CreatePlanInput!): Plan!
   updatePlan(updatePlanInput: UpdatePlanInput!): Plan!
   removePlan(id: Int!): Plan!
@@ -142,13 +141,23 @@ input UpdateUserInput {
 }
 
 input CreateCustomerInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  customerKana: String!
+  customerName: String!
+  birthDay: DateTime
+  receipt: String
+  castId: Float
 }
 
 input UpdateCustomerInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  customerKana: String
+  customerName: String
+  birthDay: DateTime
+  receipt: String
+  castId: Float
+  id: Int!
+}
+
+input RemoveCustomerInput {
   id: Int!
 }
 
@@ -181,13 +190,19 @@ input RemoveSessionInput {
 }
 
 input CreateCastInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  castName: String!
+  castKana: String!
+  castIcon: String!
 }
 
 input UpdateCastInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  castName: String
+  castKana: String
+  castIcon: String
+  id: Int!
+}
+
+input RemoveCastInput {
   id: Int!
 }
 

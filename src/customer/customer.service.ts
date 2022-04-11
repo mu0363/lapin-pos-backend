@@ -1,28 +1,46 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { CreateCustomerInput } from './dto/create-customer.input';
+import { RemoveCustomerInput } from './dto/remove-customer.input';
 import { UpdateCustomerInput } from './dto/update-customer.input';
 
 @Injectable()
 export class CustomerService {
   constructor(private readonly prisma: PrismaService) {}
-  create(createCustomerInput: CreateCustomerInput) {
-    return 'This action adds a new customer';
+  create(createCustomerInput: CreateCustomerInput, userId: string) {
+    return this.prisma.customer.create({
+      data: { ...createCustomerInput, userId },
+      include: {
+        cast: true,
+      },
+    });
   }
 
-  findAll() {
-    return this.prisma.customer.findMany();
+  async findAll(userId) {
+    return this.prisma.customer.findMany({ where: { userId } });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} customer`;
+  update(updateCustomerInput: UpdateCustomerInput, userId: string) {
+    return this.prisma.customer.update({
+      where: {
+        id_userId: {
+          id: updateCustomerInput.id,
+          userId,
+        },
+      },
+      data: updateCustomerInput,
+      include: {
+        cast: true,
+      },
+    });
   }
 
-  update(id: number, updateCustomerInput: UpdateCustomerInput) {
-    return `This action updates a #${id} customer`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} customer`;
+  remove(removeCustomerInput: RemoveCustomerInput, userId: string) {
+    return this.prisma.customer.delete({
+      where: { id_userId: { id: removeCustomerInput.id, userId } },
+      include: {
+        cast: true,
+      },
+    });
   }
 }

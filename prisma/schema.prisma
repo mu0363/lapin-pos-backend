@@ -21,10 +21,12 @@ model User {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
 
-  customers Customer[]
-  casts     Cast[]
-  sessions  Session[]
-  order     Order[]
+  customers   Customer[]
+  casts       Cast[]
+  sessions    Session[]
+  order       Order[]
+  Purchase    Purchase[]
+  liquorStore liquorStore[]
   @@map("user")
 }
 
@@ -56,18 +58,20 @@ model Category {
 }
 
 model Cast {
-  id           Int      @id @default(autoincrement())
-  castName     String   @unique @map(name: "cast_name") @db.VarChar(255)
-  castKana     String   @unique @map(name: "cast_kana") @db.VarChar(255)
-  castIcon     String   @map(name: "cast_icon") @db.VarChar(255)
-  lastWorkDate DateTime @default(now()) @map("last_work_date")
-  createdAt    DateTime @default(now()) @map(name: "created_at")
-  updatedAt    DateTime @updatedAt @map(name: "updated_at")
+  id           Int       @id @default(autoincrement())
+  castName     String    @unique @map(name: "cast_name") @db.VarChar(255)
+  castKana     String    @unique @map(name: "cast_kana") @db.VarChar(255)
+  castIcon     String    @map(name: "cast_icon") @db.VarChar(255)
+  lastWorkDate DateTime? @map("last_work_date")
+  createdAt    DateTime  @default(now()) @map(name: "created_at")
+  updatedAt    DateTime  @updatedAt @map(name: "updated_at")
 
   customers Customer[]
   session   Session[]
   user      User?      @relation(fields: [userId], references: [id])
   userId    String?
+
+  @@unique([id, userId])
   @@map(name: "casts")
 }
 
@@ -93,10 +97,12 @@ model Customer {
   updatedAt     DateTime  @updatedAt @map(name: "updated_at")
 
   session Session[]
-  cast    Cast      @relation(fields: [castId], references: [id])
-  castId  Int
+  cast    Cast?     @relation(fields: [castId], references: [id])
+  castId  Int?
   user    User?     @relation(fields: [userId], references: [id])
   userId  String?
+
+  @@unique([id, userId])
   @@map(name: "customers")
 }
 
@@ -134,6 +140,39 @@ model Order {
 
   @@unique([id, userId])
   @@map(name: "orders")
+}
+
+model liquorStore {
+  id              Int      @id @default(autoincrement())
+  liquorStoreName String   @map(name: "liquor_store_name")
+  address         String?
+  phone           String?
+  staff           String?
+  createdAt       DateTime @default(now()) @map(name: "created_at")
+  updatedAt       DateTime @updatedAt @map(name: "updated_at")
+
+  user   User?   @relation(fields: [userId], references: [id])
+  userId String?
+
+  @@unique([id, userId])
+  @@map(name: "liquor_store")
+}
+
+model Purchase {
+  id              Int      @id @default(autoincrement())
+  itemName        String   @map(name: "item_name")
+  liquorStoreName String   @map(name: "liquor_store_name")
+  price           Int
+  count           Int
+  totalPrice      Int
+  createdAt       DateTime @default(now()) @map(name: "created_at")
+  updatedAt       DateTime @updatedAt @map(name: "updated_at")
+
+  user   User?   @relation(fields: [userId], references: [id])
+  userId String?
+
+  @@unique([id, userId])
+  @@map(name: "purchases")
 }
 
 // 参考動画

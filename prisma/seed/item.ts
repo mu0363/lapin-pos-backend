@@ -212,22 +212,13 @@ export const item = async () => {
         cost: 0,
       },
       {
-        itemName: 'グラスビール',
+        itemName: '瓶ビール',
         itemUrl:
-          'https://storage.googleapis.com/lapin-pos-storage/item/beer.jpg',
-        categoryId: 5,
-        price: 1000,
-        stock: 1,
-        cost: 0,
-      },
-      {
-        itemName: 'オリジナルグラスビール',
-        itemUrl:
-          'https://storage.googleapis.com/lapin-pos-storage/item/beer.jpg',
+          'https://storage.googleapis.com/lapin-pos-storage/item/beer_bottle.jpg',
         categoryId: 6,
         price: 500,
         stock: 1,
-        cost: 0,
+        cost: 200,
       },
       {
         itemName: 'ソフトドリンク',
