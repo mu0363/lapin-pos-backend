@@ -1,7 +1,15 @@
-import { InputType, Int, Field } from '@nestjs/graphql';
+import { Field, InputType, Int } from '@nestjs/graphql';
+import { IsInt, IsNotEmpty, Max, MaxLength } from 'class-validator';
 
 @InputType()
 export class CreatePlanInput {
-  @Field(() => Int, { description: 'Example field (placeholder)' })
-  exampleField: number;
+  @IsNotEmpty()
+  @MaxLength(100)
+  planName: string;
+
+  @Field(() => Int)
+  @IsNotEmpty()
+  @IsInt()
+  @Max(100000)
+  price: number;
 }

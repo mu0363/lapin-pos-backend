@@ -96,7 +96,6 @@ type Query {
   sessions: [Session!]!
   casts: [Cast!]!
   plans: [Plan!]!
-  plan(id: Int!): Plan!
   orders: [Order!]!
 }
 
@@ -118,7 +117,7 @@ type Mutation {
   removeCast(removeCastInput: RemoveCastInput!): Cast!
   createPlan(createPlanInput: CreatePlanInput!): Plan!
   updatePlan(updatePlanInput: UpdatePlanInput!): Plan!
-  removePlan(id: Int!): Plan!
+  removePlan(removePlanInput: RemovePlanInput!): Plan!
   createOrder(createOrderInput: CreateOrderInput!): Order!
   updateOrder(updateOrderInput: UpdateOrderInput!): Order!
   removeOrder(removeOrderInput: RemoveOrderInput!): Order!
@@ -207,13 +206,17 @@ input RemoveCastInput {
 }
 
 input CreatePlanInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  price: Int!
+  planName: String!
 }
 
 input UpdatePlanInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  price: Int
+  planName: String
+  id: Int!
+}
+
+input RemovePlanInput {
   id: Int!
 }
 

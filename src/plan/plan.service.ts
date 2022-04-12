@@ -1,28 +1,30 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { CreatePlanInput } from './dto/create-plan.input';
+import { RemovePlanInput } from './dto/remove-plan.input';
 import { UpdatePlanInput } from './dto/update-plan.input';
 
 @Injectable()
 export class PlanService {
   constructor(private readonly prisma: PrismaService) {}
-  create(createPlanInput: CreatePlanInput) {
-    return 'This action adds a new plan';
+  create(createPlanInput: CreatePlanInput, userId: string) {
+    return this.prisma.plan.create({ data: { ...createPlanInput, userId } });
   }
 
-  findAll() {
-    return this.prisma.plan.findMany();
+  findAll(userId: string) {
+    return this.prisma.plan.findMany({ where: { userId } });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} plan`;
+  update(updatePlanInput: UpdatePlanInput, userId: string) {
+    return this.prisma.plan.update({
+      where: { id_userId: { id: updatePlanInput.id, userId } },
+      data: updatePlanInput,
+    });
   }
 
-  update(id: number, updatePlanInput: UpdatePlanInput) {
-    return `This action updates a #${id} plan`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} plan`;
+  remove(removePlanInput: RemovePlanInput, userId) {
+    return this.prisma.plan.delete({
+      where: { id_userId: { id: removePlanInput.id, userId } },
+    });
   }
 }
