@@ -41,9 +41,18 @@ type User {
   updatedAt: DateTime!
 }
 
+type Category {
+  id: Int!
+  categoryName: String!
+  userId: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
 type Item {
   id: Int!
   categoryId: Int!
+  category: Category!
   price: Int!
   stock: Int!
   cost: Int!
@@ -92,11 +101,11 @@ type Query {
   user(uid: String!): User!
   customers: [Customer!]!
   items: [Item!]!
-  item(id: Int!): Item!
   sessions: [Session!]!
   casts: [Cast!]!
   plans: [Plan!]!
   orders: [Order!]!
+  categories: [Category!]!
 }
 
 type Mutation {
@@ -108,7 +117,7 @@ type Mutation {
   removeCustomer(removeCustomerInput: RemoveCustomerInput!): Customer!
   createItem(createItemInput: CreateItemInput!): Item!
   updateItem(updateItemInput: UpdateItemInput!): Item!
-  removeItem(id: Int!): Item!
+  removeItem(removeItemInput: RemoveItemInput!): Item!
   createSession(createSessionInput: CreateSessionInput!): Session!
   updateSession(updateSessionInput: UpdateSessionInput!): Session!
   removeSession(removeSessionInput: RemoveSessionInput!): Session!
@@ -121,6 +130,9 @@ type Mutation {
   createOrder(createOrderInput: CreateOrderInput!): Order!
   updateOrder(updateOrderInput: UpdateOrderInput!): Order!
   removeOrder(removeOrderInput: RemoveOrderInput!): Order!
+  createCategory(createCategoryInput: CreateCategoryInput!): Category!
+  updateCategory(updateCategoryInput: UpdateCategoryInput!): Category!
+  removeCategory(id: Int!): Category!
 }
 
 input CreateUserInput {
@@ -140,19 +152,19 @@ input UpdateUserInput {
 }
 
 input CreateCustomerInput {
+  castId: Int
   customerKana: String!
   customerName: String!
   birthDay: DateTime
   receipt: String
-  castId: Float
 }
 
 input UpdateCustomerInput {
+  castId: Float
   customerKana: String
   customerName: String
   birthDay: DateTime
   receipt: String
-  castId: Float
   id: Int!
 }
 
@@ -161,13 +173,25 @@ input RemoveCustomerInput {
 }
 
 input CreateItemInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  categoryId: Int!
+  price: Int!
+  stock: Int!
+  cost: Int!
+  itemName: String!
+  itemUrl: String!
 }
 
 input UpdateItemInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  categoryId: Int
+  price: Int
+  stock: Int
+  cost: Int
+  itemName: String
+  itemUrl: String
+  id: Int!
+}
+
+input RemoveItemInput {
   id: Int!
 }
 
@@ -228,13 +252,24 @@ input CreateOrderInput {
 }
 
 input UpdateOrderInput {
-  count: Int!
-  total: Int!
-  sessionId: Int!
-  itemId: Int!
+  count: Int
+  total: Int
+  sessionId: Int
+  itemId: Int
   id: Int!
 }
 
 input RemoveOrderInput {
+  id: Int!
+}
+
+input CreateCategoryInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateCategoryInput {
+  """Example field (placeholder)"""
+  exampleField: Int
   id: Int!
 }

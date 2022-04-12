@@ -1,20 +1,11 @@
-import { InputType } from '@nestjs/graphql';
-import {
-  IsInt,
-  Max,
-  MaxLength,
-  IsNotEmpty,
-  IsDate,
-  IsOptional,
-} from 'class-validator';
+import { Field, InputType, Int } from '@nestjs/graphql';
+import { IsInt, Max, MaxLength, IsDate, IsOptional } from 'class-validator';
 
 @InputType()
 export class CreateCustomerInput {
-  @IsNotEmpty()
   @MaxLength(100)
   customerKana: string;
 
-  @IsNotEmpty()
   @MaxLength(100)
   customerName: string;
 
@@ -26,6 +17,7 @@ export class CreateCustomerInput {
   @IsOptional()
   receipt?: string;
 
+  @Field(() => Int)
   @IsInt()
   @Max(1000)
   @IsOptional()
