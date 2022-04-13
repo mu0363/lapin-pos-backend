@@ -18,7 +18,7 @@ CREATE TABLE `user` (
 CREATE TABLE `items` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `item_name` VARCHAR(255) NOT NULL,
-    `item_url` VARCHAR(191) NOT NULL,
+    `item_url` VARCHAR(191) NULL,
     `price` INTEGER NOT NULL,
     `stock` INTEGER NOT NULL,
     `cost` INTEGER NOT NULL,
