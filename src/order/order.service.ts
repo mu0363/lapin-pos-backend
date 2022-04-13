@@ -11,7 +11,11 @@ export class OrderService {
     return this.prisma.order.create({
       data: { ...createOrderInput, userId },
       include: {
-        item: true,
+        item: {
+          include: {
+            category: true,
+          },
+        },
         session: true,
       },
     });
@@ -21,7 +25,11 @@ export class OrderService {
     return this.prisma.order.findMany({
       where: { userId },
       include: {
-        item: true,
+        item: {
+          include: {
+            category: true,
+          },
+        },
         session: true,
       },
     });
@@ -40,7 +48,11 @@ export class OrderService {
         total: updateOrderInput.total,
       },
       include: {
-        item: true,
+        item: {
+          include: {
+            category: true,
+          },
+        },
         session: true,
       },
     });
@@ -55,7 +67,11 @@ export class OrderService {
         },
       },
       include: {
-        item: true,
+        item: {
+          include: {
+            category: true,
+          },
+        },
         session: true,
       },
     });

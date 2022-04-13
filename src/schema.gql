@@ -38,11 +38,6 @@ type Customer {
   updatedAt: DateTime!
 }
 
-type ItemImage {
-  itemId: Int!
-  itemImageUrl: String!
-}
-
 type Item {
   id: Int!
   categoryId: Int!
@@ -138,8 +133,6 @@ type Mutation {
   createCategory(createCategoryInput: CreateCategoryInput!): Category!
   updateCategory(updateCategoryInput: UpdateCategoryInput!): Category!
   removeCategory(id: Int!): Category!
-  uploadItemImage(file: Upload!, itemId: Int!): ItemImage!
-  removeItemImage: ItemImage!
 }
 
 input CreateUserInput {

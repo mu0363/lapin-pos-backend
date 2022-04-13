@@ -16,7 +16,9 @@ export class SessionService {
         plan: true,
         order: {
           include: {
-            item: true,
+            item: {
+              include: { category: true },
+            },
           },
         },
       },
@@ -32,7 +34,9 @@ export class SessionService {
         plan: true,
         order: {
           include: {
-            item: true,
+            item: {
+              include: { category: true },
+            },
           },
         },
       },
@@ -53,7 +57,9 @@ export class SessionService {
         plan: true,
         order: {
           include: {
-            item: true,
+            item: {
+              include: { category: true },
+            },
           },
         },
       },
@@ -77,7 +83,9 @@ export class SessionService {
         plan: true,
         order: {
           include: {
-            item: true,
+            item: {
+              include: { category: true },
+            },
           },
         },
       },

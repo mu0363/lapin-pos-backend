@@ -8,7 +8,6 @@ import { CastModule } from './cast/cast.module';
 import { CategoryModule } from './category/category.module';
 import { CustomerModule } from './customer/customer.module';
 import { healthCheckController } from './healthCheck.controller';
-import { ItemImageModule } from './item-image/item-image.module';
 import { ItemModule } from './item/item.module';
 import { OrderModule } from './order/order.module';
 import { PlanModule } from './plan/plan.module';
@@ -37,7 +36,6 @@ import { UserModule } from './user/user.module';
     PlanModule,
     OrderModule,
     CategoryModule,
-    ItemImageModule,
   ],
   controllers: [healthCheckController],
   providers: [PrismaService],
