@@ -1,5 +1,5 @@
 import { InputType, Int, Field } from '@nestjs/graphql';
-import { Max, MaxLength } from 'class-validator';
+import { IsOptional, Max, MaxLength } from 'class-validator';
 
 @InputType()
 export class CreateItemInput {
@@ -7,7 +7,8 @@ export class CreateItemInput {
   itemName: string;
 
   @MaxLength(255)
-  itemUrl: string;
+  @IsOptional()
+  itemUrl?: string;
 
   @Field(() => Int)
   @Max(1000)

@@ -1,5 +1,6 @@
 import { ParseUUIDPipe, UseGuards } from '@nestjs/common';
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
+import { FileUpload, GraphQLUpload } from 'graphql-upload';
 import { GetCurrentUserId } from 'src/common/decorators/current-user-id.decorator';
 import { AuthenticateGuard } from 'src/common/guards/authenticate.guard';
 import { CreateItemInput } from './dto/create-item.input';
@@ -17,8 +18,9 @@ export class ItemResolver {
   createItem(
     @GetCurrentUserId('userId', new ParseUUIDPipe()) userId: string,
     @Args('createItemInput') createItemInput: CreateItemInput,
+    @Args({ name: 'file', type: () => GraphQLUpload }) file: FileUpload,
   ) {
-    return this.itemService.create(createItemInput, userId);
+    return this.itemService.create(createItemInput, userId, file);
   }
 
   @Query(() => [Item], { name: 'items' })
@@ -30,8 +32,10 @@ export class ItemResolver {
   updateItem(
     @GetCurrentUserId('userId', new ParseUUIDPipe()) userId: string,
     @Args('updateItemInput') updateItemInput: UpdateItemInput,
+    @Args({ name: 'file', type: () => GraphQLUpload, nullable: true })
+    file: FileUpload,
   ) {
-    return this.itemService.update(updateItemInput, userId);
+    return this.itemService.update(updateItemInput, userId, file);
   }
 
   @Mutation(() => Item)

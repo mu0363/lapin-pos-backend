@@ -36,7 +36,7 @@ model User {
 model Item {
   id        Int      @id @default(autoincrement())
   itemName  String   @unique @map(name: "item_name") @db.VarChar(255)
-  itemUrl   String   @map(name: "item_url")
+  itemUrl   String?  @map(name: "item_url")
   price     Int
   stock     Int
   cost      Int

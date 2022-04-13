@@ -1,5 +1,6 @@
 import { Bucket, DeleteFileOptions, Storage } from '@google-cloud/storage';
 import { BadRequestException, Injectable } from '@nestjs/common';
+import { FileUpload } from 'graphql-upload';
 
 @Injectable()
 export class CloudStorageService {
@@ -18,12 +19,26 @@ export class CloudStorageService {
   }
 
   private async saveImageToStorage(
-    uploadedFile: Express.Multer.File,
+    uploadedFile: FileUpload,
     filePath: string,
   ): Promise<void> {
     const file = this.storage.bucket(this.bucket.name).file(filePath);
     try {
-      await file.save(uploadedFile.buffer, {
+      const stream = uploadedFile.createReadStream();
+      const chunks = [];
+
+      const buffer = await new Promise<Buffer>((resolve, reject) => {
+        let buffer: Buffer;
+        stream.on('data', (chunk) => {
+          chunks.push(chunk);
+        });
+        stream.on('end', () => {
+          buffer = Buffer.concat(chunks);
+          resolve(buffer);
+        });
+      });
+
+      await file.save(buffer, {
         contentType: uploadedFile.mimetype,
       });
     } catch (error) {
@@ -31,10 +46,7 @@ export class CloudStorageService {
     }
   }
 
-  async uploadImage(
-    uploadedFile: Express.Multer.File,
-    filePath: string,
-  ): Promise<string> {
+  async uploadImage(uploadedFile: FileUpload, filePath: string) {
     await this.saveImageToStorage(uploadedFile, filePath);
     const STORAGE_URL = process.env.STORAGE_URL;
 
