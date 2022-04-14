@@ -238,6 +238,15 @@ export const item = async (userId: string) => {
         stock: 1,
         cost: 0,
       },
+      {
+        itemName: '値引き',
+        itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/discount.jpg`,
+        // itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/${userId}/discount.jpg`,
+        categoryId: 8,
+        price: -1000,
+        stock: 0,
+        cost: 0,
+      },
     ],
   });
 };
