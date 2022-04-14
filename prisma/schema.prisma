@@ -30,6 +30,8 @@ model User {
   Plan        Plan[]
   Item        Item[]
   Category    Category[]
+  Sale        Sale[]
+  SaleOrder   SaleOrder[]
   @@map("user")
 }
 
@@ -194,6 +196,46 @@ model Purchase {
 
   @@unique([id, userId])
   @@map(name: "purchases")
+}
+
+model Sale {
+  id            Int      @id @default(autoincrement())
+  customerName  String   @map(name: "customer_name") @db.VarChar(255)
+  customerKana  String   @map(name: "customer_kana") @db.VarChar(255)
+  receipt       String?  @db.VarChar(255)
+  castName      String   @map(name: "cast_name") @db.VarChar(255)
+  planName      String   @map(name: "plan_name") @db.VarChar(255)
+  planPrice     Int
+  enteredAt     DateTime @map(name: "entered_at")
+  exitedAt      DateTime @map(name: "exited_at")
+  totalTime     Int      @map(name: "total_time")
+  extendedTime  Int      @map(name: "extended_time")
+  extendedPrice Int      @map(name: "extended_price")
+  subtotal      Int      @map(name: "subtotal")
+  servicePrice  Int      @map(name: "service_price")
+  taxPrice      Int      @map(name: "tax_price")
+  totalPrice    Int      @map(name: "total_price")
+
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @updatedAt @map(name: "updated_at")
+
+  user   User?   @relation(fields: [userId], references: [id])
+  userId String?
+
+  @@unique([id, userId])
+  @@map(name: "sales")
+}
+
+model SaleOrder {
+  id       Int    @id @default(autoincrement())
+  itemName String @map(name: "item_name")
+  price    Int
+  count    Int
+
+  user   User?   @relation(fields: [userId], references: [id])
+  userId String?
+  @@unique([id, userId])
+  @@map(name: "sale_orders")
 }
 
 // 参考動画
