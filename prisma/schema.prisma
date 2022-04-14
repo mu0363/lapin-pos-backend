@@ -120,9 +120,17 @@ model Customer {
 }
 
 model Session {
-  id        Int      @id @default(autoincrement())
-  enteredAt DateTime @default(now()) @map(name: "entered_at")
-  exitedAt  DateTime @default(now()) @map(name: "exited_at")
+  id            Int      @id @default(autoincrement())
+  enteredAt     DateTime @default(now()) @map(name: "entered_at")
+  exitedAt      DateTime @default(now()) @map(name: "exited_at")
+  isChecked     Boolean  @default(false) @map(name: "is_checked")
+  totalTime     Int      @default(0) @map(name: "total_time")
+  extendedTime  Int      @default(0) @map(name: "extended_time")
+  extendedPrice Int      @default(0) @map(name: "extended_price")
+  subtotal      Int      @default(0) @map(name: "subtotal")
+  servicePrice  Int      @default(0) @map(name: "service_price")
+  taxPrice      Int      @default(0) @map(name: "tax_price")
+  totalPrice    Int      @default(0) @map(name: "total_price")
 
   order      Order[]
   customer   Customer @relation(fields: [customerId], references: [id])

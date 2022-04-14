@@ -61,16 +61,24 @@ type Plan {
 
 type Session {
   id: Int!
-  customer: Customer!
-  cast: Cast!
-  plan: Plan!
+  totalTime: Int!
+  extendedTime: Int!
+  extendedPrice: Int!
+  subtotal: Int!
+  servicePrice: Int!
+  taxPrice: Int!
+  totalPrice: Int!
   order: [Order!]
+  customer: Customer!
   customerId: Int!
+  cast: Cast!
   castId: Int!
+  plan: Plan!
   planId: Int!
-  userId: String
   enteredAt: DateTime!
   exitedAt: DateTime!
+  isChecked: Boolean!
+  userId: String
 }
 
 type Order {
@@ -208,8 +216,17 @@ input CreateSessionInput {
 input UpdateSessionInput {
   customerId: Int
   castId: Int
-  planId: Int!
+  planId: Int
   id: Int!
+  totalTime: Int
+  extendedTime: Int
+  extendedPrice: Int
+  subtotal: Int
+  servicePrice: Int
+  taxPrice: Int
+  totalPrice: Int
+  isChecked: Boolean
+  exitedAt: DateTime
 }
 
 input RemoveSessionInput {

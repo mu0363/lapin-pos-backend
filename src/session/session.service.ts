@@ -63,9 +63,7 @@ export class SessionService {
           },
         },
       },
-      data: {
-        planId: updateSessionInput.planId,
-      },
+      data: updateSessionInput,
     });
   }
 
