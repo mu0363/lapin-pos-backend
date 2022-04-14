@@ -1,13 +1,13 @@
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
-export const item = async () => {
+export const item = async (userId: string) => {
   await prisma.item.createMany({
     data: [
       {
         itemName: '鏡月',
-        itemUrl:
-          'https://storage.googleapis.com/lapin-pos-storage/item/kyogetsu.jpg',
+        itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/kyogetsu.jpg`,
+        // itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/${userId}/kyogetsu.jpg`,
         categoryId: 1,
         price: 3000,
         stock: 1,
@@ -15,8 +15,8 @@ export const item = async () => {
       },
       {
         itemName: '鍛高譚(しそ)',
-        itemUrl:
-          'https://storage.googleapis.com/lapin-pos-storage/item/tantakatan_shiso.jpg',
+        itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/tantakatan_shiso.jpg`,
+        // itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/${userId}/tantakatan_shiso.jpg`,
         categoryId: 1,
         price: 3000,
         stock: 1,
@@ -24,8 +24,8 @@ export const item = async () => {
       },
       {
         itemName: '黒霧島(芋)',
-        itemUrl:
-          'https://storage.googleapis.com/lapin-pos-storage/item/kurokirishima.jpg',
+        itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/kurokirishima.jpg`,
+        // itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/${userId}/kurokirishima.jpg`,
         categoryId: 1,
         price: 4000,
         stock: 1,
@@ -33,8 +33,8 @@ export const item = async () => {
       },
       {
         itemName: 'いいちこ黒瓶(麦)',
-        itemUrl:
-          'https://storage.googleapis.com/lapin-pos-storage/item/iichiko.jpg',
+        itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/iichiko.jpg`,
+        // itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/${userId}/iichiko.jpg`,
         categoryId: 1,
         price: 5000,
         stock: 1,
@@ -42,8 +42,8 @@ export const item = async () => {
       },
       {
         itemName: '吉四六(麦)',
-        itemUrl:
-          'https://storage.googleapis.com/lapin-pos-storage/item/kichomu.jpg',
+        itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/kichomu.jpg`,
+        // itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/${userId}/kichomu.jpg`,
         categoryId: 1,
         price: 7000,
         stock: 1,
@@ -51,8 +51,8 @@ export const item = async () => {
       },
       {
         itemName: '鍛高譚 梅酒',
-        itemUrl:
-          'https://storage.googleapis.com/lapin-pos-storage/item/tantakatan_umeshu.jpg',
+        itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/tantakatan_umeshu.jpg`,
+        // itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/${userId}/tantakatan_umeshu.jpg`,
         categoryId: 2,
         price: 3000,
         stock: 1,
@@ -60,8 +60,8 @@ export const item = async () => {
       },
       {
         itemName: 'CHOYA 梅酒',
-        itemUrl:
-          'https://storage.googleapis.com/lapin-pos-storage/item/choya_umeshu.jpg',
+        itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/choya_umeshu.jpg`,
+        // itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/${userId}/choya_umeshu.jpg`,
         categoryId: 2,
         price: 5000,
         stock: 1,
@@ -69,8 +69,8 @@ export const item = async () => {
       },
       {
         itemName: 'I.W. ハーパーゴールドメダル',
-        itemUrl:
-          'https://storage.googleapis.com/lapin-pos-storage/item/iw_harper_gold_medal.jpg',
+        itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/iw_harper_gold_medal.jpg`,
+        // itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/${userId}/iw_harper_gold_medal.jpg`,
         categoryId: 3,
         price: 6000,
         stock: 1,
@@ -78,8 +78,8 @@ export const item = async () => {
       },
       {
         itemName: 'ジャックダニエル',
-        itemUrl:
-          'https://storage.googleapis.com/lapin-pos-storage/item/jack_daniels.jpg',
+        itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/jack_daniels.jpg`,
+        // itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/${userId}/jack_daniels.jpg`,
         categoryId: 3,
         price: 7000,
         stock: 1,
@@ -87,8 +87,8 @@ export const item = async () => {
       },
       {
         itemName: 'バランタイン 12年',
-        itemUrl:
-          'https://storage.googleapis.com/lapin-pos-storage/item/ballantines_12years.jpg',
+        itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/ballantines_12years.jpg`,
+        // itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/${userId}/ballantines_12years.jpg`,
         categoryId: 3,
         price: 8000,
         stock: 1,
@@ -96,8 +96,8 @@ export const item = async () => {
       },
       {
         itemName: '竹鶴',
-        itemUrl:
-          'https://storage.googleapis.com/lapin-pos-storage/item/taketsuru.jpg',
+        itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/taketsuru.jpg`,
+        // itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/${userId}/taketsuru.jpg`,
         categoryId: 3,
         price: 12000,
         stock: 1,
@@ -105,8 +105,8 @@ export const item = async () => {
       },
       {
         itemName: 'I.W.ハーパー 12年',
-        itemUrl:
-          'https://storage.googleapis.com/lapin-pos-storage/item/iw_harper_12years.jpg',
+        itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/iw_harper_12years.jpg`,
+        // itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/${userId}/iw_harper_12years.jpg`,
         categoryId: 3,
         price: 18000,
         stock: 1,
@@ -114,8 +114,8 @@ export const item = async () => {
       },
       {
         itemName: 'Café de Paris',
-        itemUrl:
-          'https://storage.googleapis.com/lapin-pos-storage/item/cafe_de_paris.jpg',
+        itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/cafe_de_paris.jpg`,
+        // itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/${userId}/cafe_de_paris.jpg`,
         categoryId: 4,
         price: 10000,
         stock: 1,
@@ -123,8 +123,8 @@ export const item = async () => {
       },
       {
         itemName: 'Moët & Chandon',
-        itemUrl:
-          'https://storage.googleapis.com/lapin-pos-storage/item/moet_chandon.jpg',
+        itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/moet_chandon.jpg`,
+        // itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/${userId}/moet_chandon.jpg`,
         categoryId: 4,
         price: 22000,
         stock: 1,
@@ -132,8 +132,8 @@ export const item = async () => {
       },
       {
         itemName: 'Moët & Chandon Rosé',
-        itemUrl:
-          'https://storage.googleapis.com/lapin-pos-storage/item/moet_chandon_rose.jpg',
+        itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/moet_chandon_rose.jpg`,
+        // itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/${userId}/moet_chandon_rose.jpg`,
         categoryId: 4,
         price: 28000,
         stock: 1,
@@ -141,8 +141,8 @@ export const item = async () => {
       },
       {
         itemName: 'Veuve Clicquot Yellow',
-        itemUrl:
-          'https://storage.googleapis.com/lapin-pos-storage/item/veuve_clicquot_yellow.jpg',
+        itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/veuve_clicquot_yellow.jpg`,
+        // itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/${userId}/veuve_clicquot_yellow.jpg`,
         categoryId: 4,
         price: 30000,
         stock: 1,
@@ -150,8 +150,8 @@ export const item = async () => {
       },
       {
         itemName: 'Veuve Clicquot Rosé',
-        itemUrl:
-          'https://storage.googleapis.com/lapin-pos-storage/item/veuve_clicquot_rose.jpg',
+        itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/veuve_clicquot_rose.jpg`,
+        // itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/${userId}/veuve_clicquot_rose.jpg`,
         categoryId: 4,
         price: 40000,
         stock: 1,
@@ -159,8 +159,8 @@ export const item = async () => {
       },
       {
         itemName: 'Domperignon Vintage',
-        itemUrl:
-          'https://storage.googleapis.com/lapin-pos-storage/item/domperignon_vintage.jpg',
+        itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/domperignon_vintage.jpg`,
+        // itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/${userId}/domperignon_vintage.jpg`,
         categoryId: 4,
         price: 100000,
         stock: 1,
@@ -168,8 +168,8 @@ export const item = async () => {
       },
       {
         itemName: 'Domperignon Rosé',
-        itemUrl:
-          'https://storage.googleapis.com/lapin-pos-storage/item/domperignon_rose.jpg',
+        itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/domperignon_rose.jpg`,
+        // itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/${userId}/domperignon_rose.jpg`,
         categoryId: 4,
         price: 180000,
         stock: 1,
@@ -177,8 +177,8 @@ export const item = async () => {
       },
       {
         itemName: 'エスプレッソ',
-        itemUrl:
-          'https://storage.googleapis.com/lapin-pos-storage/item/espresso.jpg',
+        itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/espresso.jpg`,
+        // itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/${userId}/espresso.jpg`,
         categoryId: 5,
         price: 500,
         stock: 1,
@@ -186,8 +186,8 @@ export const item = async () => {
       },
       {
         itemName: 'レギュラーコーヒー',
-        itemUrl:
-          'https://storage.googleapis.com/lapin-pos-storage/item/regular_coffee.jpg',
+        itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/regular_coffee.jpg`,
+        // itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/${userId}/regular_coffee.jpg`,
         categoryId: 5,
         price: 550,
         stock: 1,
@@ -195,8 +195,8 @@ export const item = async () => {
       },
       {
         itemName: 'カフェ・ジャポーネ',
-        itemUrl:
-          'https://storage.googleapis.com/lapin-pos-storage/item/cafe_japones.jpg',
+        itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/cafe_japones.jpg`,
+        // itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/${userId}/cafe_japones.jpg`,
         categoryId: 5,
         price: 600,
         stock: 1,
@@ -204,8 +204,8 @@ export const item = async () => {
       },
       {
         itemName: 'カプチーノ',
-        itemUrl:
-          'https://storage.googleapis.com/lapin-pos-storage/item/cappuccino.jpg',
+        itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/cappuccino.jpg`,
+        // itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/${userId}/cappuccino.jpg`,
         categoryId: 5,
         price: 660,
         stock: 1,
@@ -213,8 +213,8 @@ export const item = async () => {
       },
       {
         itemName: '瓶ビール',
-        itemUrl:
-          'https://storage.googleapis.com/lapin-pos-storage/item/beer_bottle.jpg',
+        itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/beer_bottle.jpg`,
+        // itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/${userId}/beer_bottle.jpg`,
         categoryId: 6,
         price: 500,
         stock: 1,
@@ -222,8 +222,8 @@ export const item = async () => {
       },
       {
         itemName: 'ソフトドリンク',
-        itemUrl:
-          'https://storage.googleapis.com/lapin-pos-storage/item/soft_drink.jpg',
+        itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/soft_drink.jpg`,
+        // itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/${userId}/soft_drink.jpg`,
         categoryId: 6,
         price: 500,
         stock: 1,
@@ -231,8 +231,8 @@ export const item = async () => {
       },
       {
         itemName: 'ジュース類',
-        itemUrl:
-          'https://storage.googleapis.com/lapin-pos-storage/item/juice.jpg',
+        itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/juice.jpg`,
+        // itemUrl: `https://storage.googleapis.com/lapin-pos-storage/item/${userId}/juice.jpg`,
         categoryId: 7,
         price: 1500,
         stock: 1,

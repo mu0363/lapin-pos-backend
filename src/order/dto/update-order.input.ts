@@ -16,7 +16,6 @@ export class UpdateOrderInput extends PartialType(CreateOrderInput) {
 
   @Field(() => Int)
   @Max(10000000)
-  @Min(0)
   @IsOptional()
   total?: number;
 
