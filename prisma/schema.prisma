@@ -219,21 +219,26 @@ model Sale {
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @updatedAt @map(name: "updated_at")
 
-  user   User?   @relation(fields: [userId], references: [id])
-  userId String?
+  saleOrder SaleOrder[]
+  user      User?       @relation(fields: [userId], references: [id])
+  userId    String?
 
   @@unique([id, userId])
   @@map(name: "sales")
 }
 
 model SaleOrder {
-  id       Int    @id @default(autoincrement())
-  itemName String @map(name: "item_name")
-  price    Int
-  count    Int
+  id        Int    @id @default(autoincrement())
+  itemName  String @map(name: "item_name")
+  itemPrice Int    @map(name: "item_price")
+  itemCount Int    @map(name: "item_count")
+
+  sale   Sale? @relation(fields: [saleId], references: [id])
+  saleId Int
 
   user   User?   @relation(fields: [userId], references: [id])
   userId String?
+
   @@unique([id, userId])
   @@map(name: "sale_orders")
 }

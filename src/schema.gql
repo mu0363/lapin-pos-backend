@@ -93,6 +93,38 @@ type Order {
   updatedAt: DateTime!
 }
 
+type SaleOrder {
+  id: Int!
+  itemPrice: Int!
+  itemCount: Int!
+  saleId: Int
+  itemName: String!
+  userId: String
+}
+
+type Sale {
+  id: Int!
+  planPrice: Int!
+  totalTime: Int!
+  extendedTime: Int!
+  extendedPrice: Int!
+  subtotal: Int!
+  servicePrice: Int!
+  taxPrice: Int!
+  totalPrice: Int!
+  saleOrder: [SaleOrder!]
+  customerName: String!
+  customerKana: String!
+  receipt: String
+  castName: String!
+  planName: String!
+  enteredAt: DateTime!
+  exitedAt: DateTime!
+  userId: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
 type User {
   id: String!
   uid: String!
@@ -114,6 +146,8 @@ type Query {
   plans: [Plan!]!
   orders: [Order!]!
   categories: [Category!]!
+  sales: [Sale!]!
+  sale(id: Int!): Sale!
 }
 
 type Mutation {
@@ -141,6 +175,9 @@ type Mutation {
   createCategory(createCategoryInput: CreateCategoryInput!): Category!
   updateCategory(updateCategoryInput: UpdateCategoryInput!): Category!
   removeCategory(id: Int!): Category!
+  createSale(createSaleInput: CreateSaleInput!, createSaleOrderInput: [CreateSaleOrderInput!]!): Sale!
+  updateSale(updateSaleInput: UpdateSaleInput!): Sale!
+  removeSale(id: Int!): Sale!
 }
 
 input CreateUserInput {
@@ -292,5 +329,50 @@ input CreateCategoryInput {
 input UpdateCategoryInput {
   """Example field (placeholder)"""
   exampleField: Int
+  id: Int!
+}
+
+input CreateSaleInput {
+  planPrice: Int!
+  totalTime: Int!
+  extendedTime: Int!
+  extendedPrice: Int!
+  subtotal: Int!
+  servicePrice: Int!
+  taxPrice: Int!
+  totalPrice: Int!
+  customerName: String!
+  customerKana: String!
+  receipt: String
+  castName: String!
+  planName: String!
+  enteredAt: DateTime!
+  exitedAt: DateTime!
+}
+
+input CreateSaleOrderInput {
+  itemPrice: Int!
+  itemCount: Int!
+  saleId: Int
+  itemName: String!
+  userId: String
+}
+
+input UpdateSaleInput {
+  planPrice: Int
+  totalTime: Int
+  extendedTime: Int
+  extendedPrice: Int
+  subtotal: Int
+  servicePrice: Int
+  taxPrice: Int
+  totalPrice: Int
+  customerName: String
+  customerKana: String
+  receipt: String
+  castName: String
+  planName: String
+  enteredAt: DateTime
+  exitedAt: DateTime
   id: Int!
 }
