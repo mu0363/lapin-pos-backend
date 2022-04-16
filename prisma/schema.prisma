@@ -126,6 +126,7 @@ model Session {
   enteredAt     DateTime @default(now()) @map(name: "entered_at")
   exitedAt      DateTime @default(now()) @map(name: "exited_at")
   isChecked     Boolean  @default(false) @map(name: "is_checked")
+  isCreditCard  Boolean  @default(false) @map(name: "is_credit_card")
   totalTime     Int      @default(0) @map(name: "total_time")
   extendedTime  Int      @default(0) @map(name: "extended_time")
   extendedPrice Int      @default(0) @map(name: "extended_price")
@@ -215,6 +216,7 @@ model Sale {
   servicePrice  Int      @map(name: "service_price")
   taxPrice      Int      @map(name: "tax_price")
   totalPrice    Int      @map(name: "total_price")
+  isCreditCard  Boolean  @map(name: "is_credit_card")
 
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @updatedAt @map(name: "updated_at")

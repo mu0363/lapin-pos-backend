@@ -40,6 +40,8 @@ export class Sale {
   @Field(() => Int)
   totalPrice: number;
 
+  isCreditCard: boolean;
+
   userId?: string;
 
   createdAt: Date;

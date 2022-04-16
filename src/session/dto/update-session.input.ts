@@ -55,4 +55,8 @@ export class UpdateSessionInput extends PartialType(CreateSessionInput) {
   @Max(10000000)
   @IsOptional()
   totalPrice?: number;
+
+  @IsBoolean()
+  @IsOptional()
+  isCreditCard?: boolean;
 }

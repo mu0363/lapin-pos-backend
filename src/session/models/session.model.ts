@@ -13,6 +13,7 @@ export class Session {
   enteredAt: Date;
   exitedAt: Date;
   isChecked: boolean;
+  isCreditCard: boolean;
 
   @Field(() => Int)
   totalTime: number;

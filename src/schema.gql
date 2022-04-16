@@ -78,6 +78,7 @@ type Session {
   enteredAt: DateTime!
   exitedAt: DateTime!
   isChecked: Boolean!
+  isCreditCard: Boolean!
   userId: String
 }
 
@@ -120,6 +121,7 @@ type Sale {
   planName: String!
   enteredAt: DateTime!
   exitedAt: DateTime!
+  isCreditCard: Boolean!
   userId: String
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -264,6 +266,7 @@ input UpdateSessionInput {
   totalPrice: Int
   isChecked: Boolean
   exitedAt: DateTime
+  isCreditCard: Boolean
 }
 
 input RemoveSessionInput {
@@ -348,6 +351,7 @@ input CreateSaleInput {
   planName: String!
   enteredAt: DateTime!
   exitedAt: DateTime!
+  isCreditCard: Boolean!
 }
 
 input CreateSaleOrderInput {
@@ -374,5 +378,6 @@ input UpdateSaleInput {
   planName: String
   enteredAt: DateTime
   exitedAt: DateTime
+  isCreditCard: Boolean
   id: Int!
 }

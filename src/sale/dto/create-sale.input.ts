@@ -1,5 +1,5 @@
 import { InputType, Int, Field } from '@nestjs/graphql';
-import { IsDate, IsOptional, Max, MaxLength } from 'class-validator';
+import { IsDate, IsOptional, Max, MaxLength, IsBoolean } from 'class-validator';
 
 @InputType()
 export class CreateSaleInput {
@@ -56,4 +56,7 @@ export class CreateSaleInput {
   @Field(() => Int)
   @Max(10000000)
   totalPrice: number;
+
+  @IsBoolean()
+  isCreditCard: boolean;
 }
