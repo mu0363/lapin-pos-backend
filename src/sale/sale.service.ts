@@ -10,11 +10,12 @@ export class SaleService {
   async create(
     createSaleInput: CreateSaleInput,
     createSaleOrdersInput: CreateSaleOrderInput[],
+    userId: string,
   ) {
     return this.prisma.$transaction(async (prisma) => {
       // まずセールを作成
       const saleRes = await prisma.sale.create({
-        data: createSaleInput,
+        data: { ...createSaleInput, userId },
         include: { saleOrder: true },
       });
 
@@ -29,8 +30,10 @@ export class SaleService {
     });
   }
 
-  findAll() {
+  findAll(userId: string) {
     return this.prisma.sale.findMany({
+      where: { userId },
+      orderBy: [{ exitedAt: 'desc' }],
       include: {
         saleOrder: true,
       },

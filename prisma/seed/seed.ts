@@ -8,7 +8,7 @@ import { plan } from './plan';
 const prisma = new PrismaClient();
 
 async function main() {
-  const userId = '3891f414-572e-493c-bec9-82cdf2ecd1c1';
+  const userId = 'bbe7e06c-7aa0-407e-9a65-8c3e7ed8dacd';
   await prisma.item.deleteMany();
   await prisma.category.deleteMany();
   await prisma.plan.deleteMany();
