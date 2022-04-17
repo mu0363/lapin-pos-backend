@@ -1,7 +1,10 @@
 {
   "collection": "@nestjs/schematics",
   "sourceRoot": "src",
+  "root": "src",
   "compilerOptions": {
+    "webpack": true,
+    "deleteOutDir": true,
     "plugins": [
       {
         "name": "@nestjs/graphql",
