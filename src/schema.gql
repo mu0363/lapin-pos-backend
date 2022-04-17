@@ -1,0 +1,279 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Cast {
+  id: Int!
+  castName: String!
+  castKana: String!
+  castIcon: String!
+  lastWorkDate: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Category {
+  id: Int!
+  categoryName: String!
+  userId: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Customer {
+  id: Int!
+  cast: Cast
+  castId: Int
+  customerKana: String!
+  customerName: String!
+  birthDay: DateTime
+  receipt: String
+  lastVisitDate: DateTime!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Item {
+  id: Int!
+  categoryId: Int!
+  category: Category!
+  price: Int!
+  stock: Int!
+  cost: Int!
+  itemName: String!
+  itemUrl: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Plan {
+  id: Int!
+  price: Int!
+  planName: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Session {
+  id: Int!
+  customer: Customer!
+  cast: Cast!
+  plan: Plan!
+  order: [Order!]
+  customerId: Int!
+  castId: Int!
+  planId: Int!
+  userId: String
+  enteredAt: DateTime!
+  exitedAt: DateTime!
+}
+
+type Order {
+  id: Int!
+  item: Item!
+  session: Session
+  count: Int!
+  total: Int!
+  itemId: Int!
+  userId: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type User {
+  id: String!
+  uid: String!
+  isAdmin: Boolean!
+  username: String!
+  email: String!
+  avatarUrl: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Query {
+  users: [User!]!
+  user(uid: String!): User!
+  customers: [Customer!]!
+  items: [Item!]!
+  sessions: [Session!]!
+  casts: [Cast!]!
+  plans: [Plan!]!
+  orders: [Order!]!
+  categories: [Category!]!
+}
+
+type Mutation {
+  initUser(createUserInput: CreateUserInput!): User!
+  updateUser(id: String!, updateUserInput: UpdateUserInput!): User!
+  removeUser(id: Int!): User!
+  createCustomer(createCustomerInput: CreateCustomerInput!): Customer!
+  updateCustomer(updateCustomerInput: UpdateCustomerInput!): Customer!
+  removeCustomer(removeCustomerInput: RemoveCustomerInput!): Customer!
+  createItem(createItemInput: CreateItemInput!, file: Upload!): Item!
+  updateItem(updateItemInput: UpdateItemInput!, file: Upload): Item!
+  removeItem(removeItemInput: RemoveItemInput!): Item!
+  createSession(createSessionInput: CreateSessionInput!): Session!
+  updateSession(updateSessionInput: UpdateSessionInput!): Session!
+  removeSession(removeSessionInput: RemoveSessionInput!): Session!
+  createCast(createCastInput: CreateCastInput!): Cast!
+  updateCast(updateCastInput: UpdateCastInput!): Cast!
+  removeCast(removeCastInput: RemoveCastInput!): Cast!
+  createPlan(createPlanInput: CreatePlanInput!): Plan!
+  updatePlan(updatePlanInput: UpdatePlanInput!): Plan!
+  removePlan(removePlanInput: RemovePlanInput!): Plan!
+  createOrder(createOrderInput: CreateOrderInput!): Order!
+  updateOrder(updateOrderInput: UpdateOrderInput!): Order!
+  removeOrder(removeOrderInput: RemoveOrderInput!): Order!
+  createCategory(createCategoryInput: CreateCategoryInput!): Category!
+  updateCategory(updateCategoryInput: UpdateCategoryInput!): Category!
+  removeCategory(id: Int!): Category!
+}
+
+input CreateUserInput {
+  uid: String!
+  username: String!
+  email: String!
+  avatarUrl: String!
+  isAdmin: Boolean!
+}
+
+input UpdateUserInput {
+  uid: String
+  username: String
+  email: String
+  avatarUrl: String
+  isAdmin: Boolean
+}
+
+input CreateCustomerInput {
+  castId: Int
+  customerKana: String!
+  customerName: String!
+  birthDay: DateTime
+  receipt: String
+}
+
+input UpdateCustomerInput {
+  castId: Float
+  customerKana: String
+  customerName: String
+  birthDay: DateTime
+  receipt: String
+  id: Int!
+}
+
+input RemoveCustomerInput {
+  id: Int!
+}
+
+input CreateItemInput {
+  categoryId: Int!
+  price: Int!
+  stock: Int!
+  cost: Int!
+  itemName: String!
+  itemUrl: String
+}
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
+
+input UpdateItemInput {
+  categoryId: Int
+  price: Int
+  stock: Int
+  cost: Int
+  itemName: String
+  itemUrl: String
+  id: Int!
+}
+
+input RemoveItemInput {
+  id: Int!
+  itemUrl: String!
+}
+
+input CreateSessionInput {
+  customerId: Int!
+  castId: Int!
+  planId: Int!
+}
+
+input UpdateSessionInput {
+  customerId: Int
+  castId: Int
+  planId: Int!
+  id: Int!
+}
+
+input RemoveSessionInput {
+  id: Int!
+}
+
+input CreateCastInput {
+  castName: String!
+  castKana: String!
+  castIcon: String!
+}
+
+input UpdateCastInput {
+  castName: String
+  castKana: String
+  castIcon: String
+  id: Int!
+}
+
+input RemoveCastInput {
+  id: Int!
+}
+
+input CreatePlanInput {
+  price: Int!
+  planName: String!
+}
+
+input UpdatePlanInput {
+  price: Int
+  planName: String
+  id: Int!
+}
+
+input RemovePlanInput {
+  id: Int!
+}
+
+input CreateOrderInput {
+  count: Int!
+  total: Int!
+  sessionId: Int!
+  itemId: Int!
+}
+
+input UpdateOrderInput {
+  count: Int
+  total: Int
+  sessionId: Int
+  itemId: Int
+  id: Int!
+}
+
+input RemoveOrderInput {
+  id: Int!
+}
+
+input CreateCategoryInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateCategoryInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
