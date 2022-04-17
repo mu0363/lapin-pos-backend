@@ -1,2 +1,3 @@
-yarn run prisma db push
+yarn mingate
+yarn seed
 yarn start:prod
