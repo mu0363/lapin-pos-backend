@@ -12,6 +12,7 @@ import { ItemModule } from './item/item.module';
 import { OrderModule } from './order/order.module';
 import { PlanModule } from './plan/plan.module';
 import { PrismaService } from './prisma.service';
+import { SaleModule } from './sale/sale.module';
 import { SessionModule } from './session/session.module';
 import { UserModule } from './user/user.module';
 
@@ -36,6 +37,7 @@ import { UserModule } from './user/user.module';
     PlanModule,
     OrderModule,
     CategoryModule,
+    SaleModule,
   ],
   controllers: [healthCheckController],
   providers: [PrismaService],

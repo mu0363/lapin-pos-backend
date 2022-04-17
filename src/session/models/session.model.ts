@@ -10,28 +10,52 @@ export class Session {
   @Field(() => Int)
   id: number;
 
-  @Field(() => CustomerModel)
-  customer: Customer;
+  enteredAt: Date;
+  exitedAt: Date;
+  isChecked: boolean;
+  isCreditCard: boolean;
 
-  @Field(() => CastModel)
-  cast: Cast;
+  @Field(() => Int)
+  totalTime: number;
 
-  @Field(() => PlanModel)
-  plan: Plan;
+  @Field(() => Int)
+  extendedTime: number;
+
+  @Field(() => Int)
+  extendedPrice: number;
+
+  @Field(() => Int)
+  subtotal: number;
+
+  @Field(() => Int)
+  servicePrice: number;
+
+  @Field(() => Int)
+  taxPrice: number;
+
+  @Field(() => Int)
+  totalPrice: number;
 
   @Field(() => [OrderModel], { nullable: true })
   order?: Order;
 
+  @Field(() => CustomerModel)
+  customer: Customer;
+
   @Field(() => Int)
   customerId: number;
 
+  @Field(() => CastModel)
+  cast: Cast;
+
   @Field(() => Int)
   castId: number;
+
+  @Field(() => PlanModel)
+  plan: Plan;
 
   @Field(() => Int)
   planId: number;
 
   userId?: string;
-  enteredAt: Date;
-  exitedAt: Date;
 }
