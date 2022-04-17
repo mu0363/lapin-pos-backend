@@ -11,6 +11,7 @@ export const category = async () => {
       { categoryName: 'Coffee' },
       { categoryName: 'Beer&Glass' },
       { categoryName: '割もの' },
+      { categoryName: 'その他' },
     ],
   });
 };

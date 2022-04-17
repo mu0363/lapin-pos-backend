@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
-export const customer = async () => {
+export const customer = async (userId: string) => {
   await prisma.customer.createMany({
     data: [
       {
@@ -9,18 +9,21 @@ export const customer = async () => {
         customerName: '田中 角栄',
         receipt: '株式会社 田中',
         castId: 1,
+        userId,
       },
       {
         customerKana: 'サトウ トシロウ',
         customerName: '佐藤 敏朗',
         receipt: '佐藤商事株式会社',
         castId: 1,
+        userId,
       },
       {
         customerKana: 'タケチャン',
         customerName: 'たけちゃん',
         receipt: 'たけちゃんカンパニー.inc',
         castId: 1,
+        userId,
       },
     ],
   });
