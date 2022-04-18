@@ -12,7 +12,7 @@ export class CloudStorageService {
       projectId: process.env.STORAGE_PROJECT_ID,
       credentials: {
         client_email: process.env.STORAGE_CLIENT_EMAIL,
-        private_key: process.env.STORAGE_PRIVATE_KEY,
+        private_key: process.env.STORAGE_PRIVATE_KEY.replace(/\\n/gm, '\n'),
       },
     });
     this.bucket = this.storage.bucket(process.env.STORAGE_MEDIA_BUCKET);
