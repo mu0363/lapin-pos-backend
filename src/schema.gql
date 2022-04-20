@@ -113,6 +113,7 @@ type Sale {
   servicePrice: Int!
   taxPrice: Int!
   totalPrice: Int!
+  sessionId: Int!
   saleOrder: [SaleOrder!]
   customerName: String!
   customerKana: String!
@@ -122,6 +123,7 @@ type Sale {
   enteredAt: DateTime!
   exitedAt: DateTime!
   isCreditCard: Boolean!
+  isDeleted: Boolean!
   userId: String
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -225,7 +227,7 @@ input CreateItemInput {
   stock: Int!
   cost: Int!
   itemName: String!
-  itemUrl: String
+  itemUrl: String!
 }
 
 """The `Upload` scalar type represents a file upload."""
@@ -344,6 +346,7 @@ input CreateSaleInput {
   servicePrice: Int!
   taxPrice: Int!
   totalPrice: Int!
+  sessionId: Int!
   customerName: String!
   customerKana: String!
   receipt: String
@@ -371,6 +374,7 @@ input UpdateSaleInput {
   servicePrice: Int
   taxPrice: Int
   totalPrice: Int
+  sessionId: Int
   customerName: String
   customerKana: String
   receipt: String

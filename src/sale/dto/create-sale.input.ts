@@ -57,6 +57,10 @@ export class CreateSaleInput {
   @Max(10000000)
   totalPrice: number;
 
+  @Field(() => Int)
+  @Max(10000000)
+  sessionId: number;
+
   @IsBoolean()
   isCreditCard: boolean;
 }
