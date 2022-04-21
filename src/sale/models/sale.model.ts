@@ -43,6 +43,9 @@ export class Sale {
   @Field(() => Int)
   sessionId: number;
 
+  @Field(() => Int)
+  salesGroupId?: number;
+
   isCreditCard: boolean;
 
   isDeleted: boolean;

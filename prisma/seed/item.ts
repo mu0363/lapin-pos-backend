@@ -12,6 +12,7 @@ export const item = async (userId: string) => {
         price: 3000,
         stock: 1,
         cost: 1500,
+        userId,
       },
       {
         itemName: '鍛高譚(しそ)',
@@ -21,6 +22,7 @@ export const item = async (userId: string) => {
         price: 3000,
         stock: 1,
         cost: 1500,
+        userId,
       },
       {
         itemName: '黒霧島(芋)',
@@ -30,6 +32,7 @@ export const item = async (userId: string) => {
         price: 4000,
         stock: 1,
         cost: 1500,
+        userId,
       },
       {
         itemName: 'いいちこ黒瓶(麦)',
@@ -39,6 +42,7 @@ export const item = async (userId: string) => {
         price: 5000,
         stock: 1,
         cost: 1500,
+        userId,
       },
       {
         itemName: '吉四六(麦)',
@@ -48,6 +52,7 @@ export const item = async (userId: string) => {
         price: 7000,
         stock: 1,
         cost: 1500,
+        userId,
       },
       {
         itemName: '鍛高譚 梅酒',
@@ -57,6 +62,7 @@ export const item = async (userId: string) => {
         price: 3000,
         stock: 1,
         cost: 1500,
+        userId,
       },
       {
         itemName: 'CHOYA 梅酒',
@@ -66,6 +72,7 @@ export const item = async (userId: string) => {
         price: 5000,
         stock: 1,
         cost: 1500,
+        userId,
       },
       {
         itemName: 'I.W. ハーパーゴールドメダル',
@@ -75,6 +82,7 @@ export const item = async (userId: string) => {
         price: 6000,
         stock: 1,
         cost: 1500,
+        userId,
       },
       {
         itemName: 'ジャックダニエル',
@@ -84,6 +92,7 @@ export const item = async (userId: string) => {
         price: 7000,
         stock: 1,
         cost: 1500,
+        userId,
       },
       {
         itemName: 'バランタイン 12年',
@@ -93,6 +102,7 @@ export const item = async (userId: string) => {
         price: 8000,
         stock: 1,
         cost: 1500,
+        userId,
       },
       {
         itemName: '竹鶴',
@@ -102,6 +112,7 @@ export const item = async (userId: string) => {
         price: 12000,
         stock: 1,
         cost: 1500,
+        userId,
       },
       {
         itemName: 'I.W.ハーパー 12年',
@@ -111,6 +122,7 @@ export const item = async (userId: string) => {
         price: 18000,
         stock: 1,
         cost: 1500,
+        userId,
       },
       {
         itemName: 'Café de Paris',
@@ -120,6 +132,7 @@ export const item = async (userId: string) => {
         price: 10000,
         stock: 1,
         cost: 1500,
+        userId,
       },
       {
         itemName: 'Moët & Chandon',
@@ -129,6 +142,7 @@ export const item = async (userId: string) => {
         price: 22000,
         stock: 1,
         cost: 1500,
+        userId,
       },
       {
         itemName: 'Moët & Chandon Rosé',
@@ -138,6 +152,7 @@ export const item = async (userId: string) => {
         price: 28000,
         stock: 1,
         cost: 1500,
+        userId,
       },
       {
         itemName: 'Veuve Clicquot Yellow',
@@ -147,6 +162,7 @@ export const item = async (userId: string) => {
         price: 30000,
         stock: 1,
         cost: 1500,
+        userId,
       },
       {
         itemName: 'Veuve Clicquot Rosé',
@@ -156,6 +172,7 @@ export const item = async (userId: string) => {
         price: 40000,
         stock: 1,
         cost: 1500,
+        userId,
       },
       {
         itemName: 'Domperignon Vintage',
@@ -165,6 +182,7 @@ export const item = async (userId: string) => {
         price: 100000,
         stock: 1,
         cost: 1500,
+        userId,
       },
       {
         itemName: 'Domperignon Rosé',
@@ -174,6 +192,7 @@ export const item = async (userId: string) => {
         price: 180000,
         stock: 1,
         cost: 1500,
+        userId,
       },
       {
         itemName: 'エスプレッソ',
@@ -183,6 +202,7 @@ export const item = async (userId: string) => {
         price: 500,
         stock: 1,
         cost: 0,
+        userId,
       },
       {
         itemName: 'レギュラーコーヒー',
@@ -192,6 +212,7 @@ export const item = async (userId: string) => {
         price: 550,
         stock: 1,
         cost: 0,
+        userId,
       },
       {
         itemName: 'カフェ・ジャポーネ',
@@ -201,6 +222,7 @@ export const item = async (userId: string) => {
         price: 600,
         stock: 1,
         cost: 0,
+        userId,
       },
       {
         itemName: 'カプチーノ',
@@ -210,6 +232,7 @@ export const item = async (userId: string) => {
         price: 660,
         stock: 1,
         cost: 0,
+        userId,
       },
       {
         itemName: '瓶ビール',
@@ -219,6 +242,7 @@ export const item = async (userId: string) => {
         price: 500,
         stock: 1,
         cost: 200,
+        userId,
       },
       {
         itemName: 'ソフトドリンク',
@@ -228,6 +252,7 @@ export const item = async (userId: string) => {
         price: 500,
         stock: 1,
         cost: 0,
+        userId,
       },
       {
         itemName: 'ジュース類',
@@ -237,6 +262,7 @@ export const item = async (userId: string) => {
         price: 1500,
         stock: 1,
         cost: 0,
+        userId,
       },
       {
         itemName: '値引き',
@@ -246,6 +272,7 @@ export const item = async (userId: string) => {
         price: -1000,
         stock: 0,
         cost: 0,
+        userId,
       },
     ],
   });

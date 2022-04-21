@@ -27,14 +27,15 @@ model User {
   casts       Cast[]
   sessions    Session[]
   order       Order[]
-  Purchase    Purchase[]
+  purchase    Purchase[]
   liquorStore liquorStore[]
-  Plan        Plan[]
-  Item        Item[]
-  Category    Category[]
-  Sale        Sale[]
-  SaleOrder   SaleOrder[]
+  plan        Plan[]
+  item        Item[]
+  category    Category[]
+  sale        Sale[]
+  saleOrder   SaleOrder[]
   staff       Staff[]
+  salesGroup  SalesGroup[]
   @@map("user")
 }
 
@@ -243,6 +244,9 @@ model Sale {
   isDeleted     Boolean  @default(false) @map(name: "is_deleted")
   sessionId     Int      @map(name: "session_id")
 
+  salesGroup   SalesGroup? @relation(fields: [salesGroupId], references: [id])
+  salesGroupId Int?
+
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @updatedAt @map(name: "updated_at")
 
@@ -268,6 +272,18 @@ model SaleOrder {
 
   @@unique([id, userId])
   @@map(name: "sale_orders")
+}
+
+model SalesGroup {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @updatedAt @map(name: "updated_at")
+  sale      Sale[]
+  user      User?    @relation(fields: [userId], references: [id])
+  userId    String?
+
+  @@unique([id, userId])
+  @@map(name: "sales_groups")
 }
 
 // 参考動画
