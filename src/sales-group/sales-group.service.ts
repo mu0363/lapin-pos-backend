@@ -6,63 +6,35 @@ import { UpdateSalesGroupInput } from './dto/update-sales-group.input';
 @Injectable()
 export class SalesGroupService {
   constructor(private readonly prisma: PrismaService) {}
-  async create(createSalesGroupInput: CreateSalesGroupInput[], userId: string) {
-    // まず本日全体のセールスグループを作成
-    const currentSalesGroup = await this.prisma.salesGroup.create({
-      data: { userId },
-      include: { sale: true, user: true },
+  create(createSalesGroupInput: CreateSalesGroupInput[], userId: string) {
+    return this.prisma.$transaction(async (prisma) => {
+      // まず本日全体のセールスグループを作成
+      const currentSalesGroup = await prisma.salesGroup.create({
+        data: { userId },
+        include: { sale: true, user: true },
+      });
+      await Promise.all(
+        createSalesGroupInput.map(async (salesGroup) => {
+          // セールを作成
+          const saleRes = await prisma.sale.create({
+            data: {
+              ...salesGroup.createSaleInput,
+              salesGroupId: currentSalesGroup.id,
+              userId,
+            },
+            include: { saleOrder: true },
+          });
+          // sale内のordersを作成
+          await prisma.saleOrder.createMany({
+            data: salesGroup.createSaleOrderInput.map((saleOrder) => {
+              return { ...saleOrder, saleId: saleRes.id };
+            }),
+          });
+          return saleRes;
+        }),
+      );
+      return currentSalesGroup;
     });
-    const result = await Promise.all(
-      createSalesGroupInput.map(async (salesGroup) => {
-        // セールを作成
-        const saleRes = await this.prisma.sale.create({
-          data: {
-            ...salesGroup.createSaleInput,
-            salesGroupId: currentSalesGroup.id,
-            userId,
-          },
-          include: { saleOrder: true },
-        });
-        // sale内のordersを作成
-        await this.prisma.saleOrder.createMany({
-          data: salesGroup.createSaleOrderInput.map((saleOrder) => {
-            return { ...saleOrder, saleId: saleRes.id };
-          }),
-        });
-        return saleRes;
-      }),
-    );
-
-    return currentSalesGroup;
-    // return this.prisma.$transaction(async (prisma) => {
-    //   // まず本日全体のセールスグループを作成
-    //   const currentSalesGroup = await prisma.salesGroup.create({
-    //     data: { userId },
-    //   });
-    //   const salesRes = await createSalesGroupInput.map(async (salesGroup) => {
-    //     // セールを作成
-    //     const saleRes = await prisma.sale.create({
-    //       data: {
-    //         ...salesGroup.createSaleInput,
-    //         salesGroupId: currentSalesGroup.id,
-    //         userId,
-    //       },
-    //       include: { saleOrder: true },
-    //     });
-    //     // sale内のordersを作成
-    //     await prisma.saleOrder.createMany({
-    //       data: salesGroup.createSaleOrderInput.map((saleOrder) => {
-    //         return { ...saleOrder, saleId: saleRes.id };
-    //       }),
-    //     });
-    //     return saleRes;
-    //   });
-    //   // await prisma.salesGroup.update({
-    //   //   where: { id_userId: { id: currentSalesGroup.id, userId } },
-    //   //   data: { sale: salesRes },
-    //   // });
-    //   return currentSalesGroup;
-    // });
   }
 
   findAll(userId: string) {
