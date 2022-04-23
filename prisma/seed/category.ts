@@ -12,6 +12,7 @@ export const category = async (userId: string) => {
       { categoryName: 'Beer&Glass', userId },
       { categoryName: '割もの', userId },
       { categoryName: 'その他', userId },
+      { categoryName: 'ワイン', userId },
     ],
   });
 };

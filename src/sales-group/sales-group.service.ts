@@ -15,6 +15,7 @@ export class SalesGroupService {
       });
       await Promise.all(
         createSalesGroupInput.map(async (salesGroup) => {
+          const sessionId = salesGroup.createSaleInput.sessionId;
           // セールを作成
           const saleRes = await prisma.sale.create({
             data: {
@@ -30,9 +31,16 @@ export class SalesGroupService {
               return { ...saleOrder, saleId: saleRes.id };
             }),
           });
+
+          await prisma.session.updateMany({
+            where: { id: sessionId },
+            data: { isDeleted: true },
+          });
+
           return saleRes;
         }),
       );
+
       return currentSalesGroup;
     });
   }
