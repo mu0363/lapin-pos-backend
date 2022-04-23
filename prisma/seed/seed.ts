@@ -4,21 +4,24 @@ import { category } from './category';
 import { customer } from './customer';
 import { item } from './item';
 import { plan } from './plan';
+import { sales } from './sales';
 
 const prisma = new PrismaClient();
 
 async function main() {
-  const userId = 'bbe7e06c-7aa0-407e-9a65-8c3e7ed8dacd';
+  const userId = '50e68a59-7ae9-496a-8dbd-f2e746dd99a0';
   await prisma.item.deleteMany();
   await prisma.category.deleteMany();
   await prisma.plan.deleteMany();
   await prisma.customer.deleteMany();
   await prisma.cast.deleteMany();
+  await prisma.sale.deleteMany();
   await cast(userId);
   await customer(userId);
   await plan(userId);
-  await category();
+  await category(userId);
   await item(userId);
+  await sales(userId);
 }
 
 main()
