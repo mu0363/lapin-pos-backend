@@ -18,7 +18,8 @@ export class ItemResolver {
   createItem(
     @GetCurrentUserId('userId', new ParseUUIDPipe()) userId: string,
     @Args('createItemInput') createItemInput: CreateItemInput,
-    @Args({ name: 'file', type: () => GraphQLUpload }) file: FileUpload,
+    @Args({ name: 'file', type: () => GraphQLUpload })
+    file: FileUpload,
   ) {
     return this.itemService.create(createItemInput, userId, file);
   }

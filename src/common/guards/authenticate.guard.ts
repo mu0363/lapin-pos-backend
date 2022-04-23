@@ -12,6 +12,7 @@ import { UserService } from 'src/user/user.service';
 export class AuthenticateGuard implements CanActivate {
   constructor(private readonly userService: UserService) {}
   async canActivate(context: ExecutionContext): Promise<boolean> {
+    // return true;
     const ctx = GqlExecutionContext.create(context);
     const request = ctx.getContext().req;
     const token = request.headers['authorization'].split(' ')[1];

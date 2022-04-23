@@ -15,6 +15,7 @@ import { PrismaService } from './prisma.service';
 import { SaleModule } from './sale/sale.module';
 import { SessionModule } from './session/session.module';
 import { UserModule } from './user/user.module';
+import { SalesGroupModule } from './sales-group/sales-group.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { UserModule } from './user/user.module';
     OrderModule,
     CategoryModule,
     SaleModule,
+    SalesGroupModule,
   ],
   controllers: [healthCheckController],
   providers: [PrismaService],

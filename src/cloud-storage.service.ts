@@ -23,6 +23,7 @@ export class CloudStorageService {
     filePath: string,
   ): Promise<void> {
     const file = this.storage.bucket(this.bucket.name).file(filePath);
+
     try {
       const stream = uploadedFile.createReadStream();
       const chunks = [];

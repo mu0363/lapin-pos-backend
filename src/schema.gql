@@ -113,6 +113,8 @@ type Sale {
   servicePrice: Int!
   taxPrice: Int!
   totalPrice: Int!
+  sessionId: Int!
+  salesGroupId: Int
   saleOrder: [SaleOrder!]
   customerName: String!
   customerKana: String!
@@ -122,6 +124,7 @@ type Sale {
   enteredAt: DateTime!
   exitedAt: DateTime!
   isCreditCard: Boolean!
+  isDeleted: Boolean!
   userId: String
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -138,6 +141,14 @@ type User {
   updatedAt: DateTime!
 }
 
+type SalesGroup {
+  id: Int!
+  sale: [Sale!]
+  userId: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
 type Query {
   users: [User!]!
   user(uid: String!): User!
@@ -150,6 +161,8 @@ type Query {
   categories: [Category!]!
   sales: [Sale!]!
   sale(id: Int!): Sale!
+  salesGroups: [SalesGroup!]!
+  salesGroup(id: Int!): SalesGroup!
 }
 
 type Mutation {
@@ -180,6 +193,9 @@ type Mutation {
   createSale(createSaleInput: CreateSaleInput!, createSaleOrderInput: [CreateSaleOrderInput!]!): Sale!
   updateSale(updateSaleInput: UpdateSaleInput!): Sale!
   removeSale(id: Int!): Sale!
+  createSalesGroup(createSalesGroupInput: [CreateSalesGroupInput!]!): SalesGroup!
+  updateSalesGroup(updateSalesGroupInput: UpdateSalesGroupInput!): SalesGroup!
+  removeSalesGroup(id: Int!): SalesGroup!
 }
 
 input CreateUserInput {
@@ -225,7 +241,7 @@ input CreateItemInput {
   stock: Int!
   cost: Int!
   itemName: String!
-  itemUrl: String
+  itemUrl: String!
 }
 
 """The `Upload` scalar type represents a file upload."""
@@ -336,22 +352,24 @@ input UpdateCategoryInput {
 }
 
 input CreateSaleInput {
-  planPrice: Int!
-  totalTime: Int!
-  extendedTime: Int!
   extendedPrice: Int!
-  subtotal: Int!
+  extendedTime: Int!
+  planPrice: Int!
+  salesGroupId: Int
   servicePrice: Int!
+  sessionId: Int!
+  subtotal: Int!
   taxPrice: Int!
   totalPrice: Int!
-  customerName: String!
-  customerKana: String!
-  receipt: String
+  totalTime: Int!
   castName: String!
-  planName: String!
+  customerKana: String!
+  customerName: String!
   enteredAt: DateTime!
   exitedAt: DateTime!
   isCreditCard: Boolean!
+  planName: String!
+  receipt: String
 }
 
 input CreateSaleOrderInput {
@@ -363,21 +381,34 @@ input CreateSaleOrderInput {
 }
 
 input UpdateSaleInput {
-  planPrice: Int
-  totalTime: Int
-  extendedTime: Int
   extendedPrice: Int
-  subtotal: Int
+  extendedTime: Int
+  planPrice: Int
+  salesGroupId: Int
   servicePrice: Int
+  sessionId: Int
+  subtotal: Int
   taxPrice: Int
   totalPrice: Int
-  customerName: String
-  customerKana: String
-  receipt: String
+  totalTime: Int
   castName: String
-  planName: String
+  customerKana: String
+  customerName: String
   enteredAt: DateTime
   exitedAt: DateTime
   isCreditCard: Boolean
+  planName: String
+  receipt: String
+  id: Int!
+}
+
+input CreateSalesGroupInput {
+  createSaleInput: CreateSaleInput!
+  createSaleOrderInput: [CreateSaleOrderInput!]!
+}
+
+input UpdateSalesGroupInput {
+  createSaleInput: CreateSaleInput
+  createSaleOrderInput: [CreateSaleOrderInput!]
   id: Int!
 }

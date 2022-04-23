@@ -40,7 +40,15 @@ export class Sale {
   @Field(() => Int)
   totalPrice: number;
 
+  @Field(() => Int)
+  sessionId: number;
+
+  @Field(() => Int)
+  salesGroupId?: number;
+
   isCreditCard: boolean;
+
+  isDeleted: boolean;
 
   userId?: string;
 

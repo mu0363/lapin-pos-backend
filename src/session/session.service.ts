@@ -26,20 +26,24 @@ export class SessionService {
   }
 
   findAll(userId: string) {
-    return this.prisma.session.findMany({
-      where: { userId },
-      include: {
-        customer: true,
-        cast: true,
-        plan: true,
-        order: {
-          include: {
-            item: {
-              include: { category: true },
+    return this.prisma.$transaction(async (prisma) => {
+      const sessions = await prisma.session.findMany({
+        where: { userId },
+        include: {
+          customer: true,
+          cast: true,
+          plan: true,
+          order: {
+            include: {
+              item: {
+                include: { category: true },
+              },
             },
           },
         },
-      },
+      });
+
+      return sessions.filter((session) => session.isDeleted === false);
     });
   }
 

@@ -31,12 +31,15 @@ export class SaleService {
   }
 
   findAll(userId: string) {
-    return this.prisma.sale.findMany({
-      where: { userId },
-      orderBy: [{ exitedAt: 'desc' }],
-      include: {
-        saleOrder: true,
-      },
+    return this.prisma.$transaction(async (prisma) => {
+      const sales = await prisma.sale.findMany({
+        where: { userId },
+        orderBy: [{ exitedAt: 'desc' }],
+        include: {
+          saleOrder: true,
+        },
+      });
+      return sales.filter((sale) => sale.isDeleted === false);
     });
   }
 
