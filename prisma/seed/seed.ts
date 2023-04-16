@@ -9,7 +9,7 @@ import { sales } from './sales';
 const prisma = new PrismaClient();
 
 async function main() {
-  const userId = '50e68a59-7ae9-496a-8dbd-f2e746dd99a0';
+  const userId = 'c38af6c2-adc5-4019-a270-598acd85158d';
   await prisma.item.deleteMany();
   await prisma.category.deleteMany();
   await prisma.plan.deleteMany();
