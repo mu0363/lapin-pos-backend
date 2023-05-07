@@ -1,8 +1,7 @@
-import { ParseUUIDPipe, UseGuards } from '@nestjs/common';
+import { ParseUUIDPipe } from '@nestjs/common';
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { FileUpload, GraphQLUpload } from 'graphql-upload';
 import { GetCurrentUserId } from 'src/common/decorators/current-user-id.decorator';
-import { AuthenticateGuard } from 'src/common/guards/authenticate.guard';
 import { CreateItemInput } from './dto/create-item.input';
 import { RemoveItemInput } from './dto/remove-item.input';
 import { UpdateItemInput } from './dto/update-item.input';
@@ -10,7 +9,6 @@ import { ItemService } from './item.service';
 import { Item } from './models/item.model';
 
 @Resolver(() => Item)
-@UseGuards(AuthenticateGuard)
 export class ItemResolver {
   constructor(private readonly itemService: ItemService) {}
 

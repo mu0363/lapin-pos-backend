@@ -1,7 +1,6 @@
-import { ParseUUIDPipe, UseGuards } from '@nestjs/common';
+import { ParseUUIDPipe } from '@nestjs/common';
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { GetCurrentUserId } from 'src/common/decorators/current-user-id.decorator';
-import { AuthenticateGuard } from 'src/common/guards/authenticate.guard';
 import { CreateOrderInput } from './dto/create-order.input';
 import { RemoveOrderInput } from './dto/remove-order.input';
 import { UpdateOrderInput } from './dto/update-order.input';
@@ -9,7 +8,6 @@ import { Order } from './models/order.model';
 import { OrderService } from './order.service';
 
 @Resolver(() => Order)
-@UseGuards(AuthenticateGuard)
 export class OrderResolver {
   constructor(private readonly orderService: OrderService) {}
 

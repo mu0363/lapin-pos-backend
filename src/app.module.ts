@@ -13,9 +13,9 @@ import { OrderModule } from './order/order.module';
 import { PlanModule } from './plan/plan.module';
 import { PrismaService } from './prisma.service';
 import { SaleModule } from './sale/sale.module';
+import { SalesGroupModule } from './sales-group/sales-group.module';
 import { SessionModule } from './session/session.module';
 import { UserModule } from './user/user.module';
-import { SalesGroupModule } from './sales-group/sales-group.module';
 
 @Module({
   imports: [
