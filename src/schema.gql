@@ -130,6 +130,14 @@ type Sale {
   updatedAt: DateTime!
 }
 
+type SalesGroup {
+  id: Int!
+  sale: [Sale!]
+  userId: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
 type User {
   id: String!
   uid: String!
@@ -137,14 +145,6 @@ type User {
   username: String!
   email: String!
   avatarUrl: String!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-}
-
-type SalesGroup {
-  id: Int!
-  sale: [Sale!]
-  userId: String
   createdAt: DateTime!
   updatedAt: DateTime!
 }

@@ -1,7 +1,6 @@
-import { ParseUUIDPipe, UseGuards } from '@nestjs/common';
+import { ParseUUIDPipe } from '@nestjs/common';
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { GetCurrentUserId } from 'src/common/decorators/current-user-id.decorator';
-import { AuthenticateGuard } from 'src/common/guards/authenticate.guard';
 import { CreateSessionInput } from './dto/create-session.input';
 import { RemoveSessionInput } from './dto/remove-session.input';
 import { UpdateSessionInput } from './dto/update-session.input';
@@ -9,7 +8,6 @@ import { Session } from './models/session.model';
 import { SessionService } from './session.service';
 
 @Resolver(() => Session)
-@UseGuards(AuthenticateGuard)
 export class SessionResolver {
   constructor(private readonly sessionService: SessionService) {}
 
